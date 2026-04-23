@@ -1,0 +1,4794 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Market Master Guide — Indian Markets for Beginners</title>
+    <meta
+      name="description"
+      content="A complete beginner-friendly guide to the Indian stock market. Learn NSE, BSE, NIFTY 50, order types, technical analysis, risk management, and trading psychology — all in one place."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ══════════════════════════════════════════
+       CSS_CODE
+    ══════════════════════════════════════════ */
+
+      /* ══════════════════════════════════════════
+       DESIGN TOKENS — Light & Dark
+    ══════════════════════════════════════════ */
+      :root,
+      [data-theme="light"] {
+        --bg: #f8fafc;
+        --bg-nav: #0f172a;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --primary: #021779;
+        --accent: #10b981;
+        --accent-soft: #d1fae5;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --shadow: rgba(15, 23, 42, 0.08);
+      }
+
+      [data-theme="dark"] {
+        --bg: #0b1220;
+        --bg-nav: #060d18;
+        --surface: #111827;
+        --border: #1f2937;
+        --primary: #ffffff;
+        --accent: #22c55e;
+        --accent-soft: #14532d;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --shadow: rgba(0, 0, 0, 0.45);
+      }
+
+      /* ══════════════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════════════ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text-main);
+        display: flex;
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background 0.35s,
+          color 0.35s;
+      }
+
+      /* ══════════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════════ */
+      nav#sidebar {
+        width: 264px;
+        background: var(--bg-nav);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 2.25rem 0 1.5rem;
+        overflow-y: auto;
+        z-index: 100;
+        transition:
+          background 0.35s,
+          transform 0.3s;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+      }
+
+      /* ── Brand ── */
+      .nav-brand {
+        padding: 0 1.75rem 1.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .badge-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.95rem;
+      }
+      .badge-inner {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        transition: background 0.35s;
+      }
+      .nav-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+        transition: color 0.35s;
+      }
+      .nav-brand h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.3;
+      }
+
+      /* ── Theme Toggle ── */
+      #theme-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        background: rgba(255, 255, 255, 0.07);
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 1rem;
+        flex-shrink: 0;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      #theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.28);
+      }
+      /* tooltip */
+      #theme-toggle::after {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: -2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        font-size: 0.6rem;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+      }
+      #theme-toggle:hover::after {
+        opacity: 1;
+      }
+
+      .icon-sun {
+        display: none;
+      }
+      .icon-moon {
+        display: block;
+      }
+      [data-theme="dark"] .icon-sun {
+        display: block;
+      }
+      [data-theme="dark"] .icon-moon {
+        display: none;
+      }
+
+      /* ── Nav links ── */
+      .nav-section-label {
+        padding: 1.5rem 1.75rem 0.35rem;
+        font-size: 0.58rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.2);
+        font-weight: 600;
+      }
+
+      nav#sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.52rem 1.75rem;
+        font-size: 0.81rem;
+        color: rgba(255, 255, 255, 0.46);
+        text-decoration: none;
+        font-weight: 400;
+        border-left: 2px solid transparent;
+        transition:
+          color 0.18s,
+          background 0.18s,
+          border-color 0.18s;
+      }
+      nav#sidebar a .num {
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.18);
+        font-variant-numeric: tabular-nums;
+        min-width: 1.5rem;
+      }
+      nav#sidebar a:hover,
+      nav#sidebar a.active {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.06);
+        border-left-color: var(--accent);
+      }
+      nav#sidebar a.active .num {
+        color: var(--accent);
+      }
+
+      /* ══════════════════════════════════════════
+       MAIN
+    ══════════════════════════════════════════ */
+      main {
+        margin-left: 264px;
+        flex: 1;
+        padding: 4rem 5vw 7rem;
+        max-width: calc(100vw - 264px);
+      }
+
+      /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+      .hero {
+        margin-bottom: 4.5rem;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid var(--border);
+        transition: border-color 0.35s;
+      }
+      .hero .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.67rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 1.2rem;
+        background: color-mix(in srgb, var(--primary) 10%, transparent);
+        padding: 0.25rem 0.8rem;
+        border-radius: 20px;
+        border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+        transition:
+          color 0.35s,
+          background 0.35s;
+      }
+      .hero h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--text-main);
+        margin-bottom: 1.1rem;
+        transition: color 0.35s;
+      }
+      .hero h2 em {
+        font-style: italic;
+        color: var(--primary);
+      }
+      .hero > p {
+        font-size: 1rem;
+        color: var(--text-muted);
+        max-width: 540px;
+        line-height: 1.8;
+        transition: color 0.35s;
+      }
+      .hero-meta {
+        display: flex;
+        margin-top: 2.25rem;
+        flex-wrap: wrap;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--surface);
+        width: fit-content;
+        transition:
+          background 0.35s,
+          border-color 0.35s;
+      }
+      .hero-meta .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 1.1rem 2rem;
+        border-right: 1px solid var(--border);
+        transition: border-color 0.35s;
+      }
+      .hero-meta .stat:last-child {
+        border-right: none;
+      }
+      .hero-meta .stat .val {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-main);
+        transition: color 0.35s;
+      }
+      .hero-meta .stat .key {
+        font-size: 0.67rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        transition: color 0.35s;
+      }
+
+      /* ══════════════════════════════════════════
+       CHAPTER LABEL
+    ══════════════════════════════════════════ */
+      .chapter-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        margin-top: 3.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: color 0.35s;
+      }
+      .chapter-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        transition: background 0.35s;
+      }
+
+      /* ══════════════════════════════════════════
+       SECTION CARDS
+    ══════════════════════════════════════════ */
+      .section {
+        margin-bottom: 2rem;
+        scroll-margin-top: 2rem;
+      }
+      .section-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 2.5rem 2.75rem;
+        position: relative;
+        overflow: visible;
+        transition:
+          box-shadow 0.25s,
+          background 0.35s,
+          border-color 0.35s;
+      }
+      .section-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--primary), var(--accent));
+        border-radius: 3px 0 0 3px;
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .section-card:hover {
+        box-shadow: 0 6px 30px var(--shadow);
+      }
+      .section-card:hover::before {
+        opacity: 1;
+      }
+
+      .section-tag {
+        display: inline-block;
+        font-size: 0.59rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+        background: var(--accent-soft);
+        padding: 0.18rem 0.6rem;
+        border-radius: 4px;
+        transition:
+          background 0.35s,
+          color 0.35s;
+      }
+      .section-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.55rem;
+        font-weight: 600;
+        color: var(--text-main);
+        line-height: 1.25;
+        margin-bottom: 0.5rem;
+        transition: color 0.35s;
+      }
+      .section-card .placeholder {
+        font-size: 0.86rem;
+        color: var(--text-muted);
+        font-style: italic;
+        margin-top: 0.65rem;
+        border-top: 1px dashed var(--border);
+        padding-top: 0.9rem;
+        line-height: 1.7;
+        transition:
+          color 0.35s,
+          border-color 0.35s;
+      }
+      .section-num {
+        position: absolute;
+        top: 1.4rem;
+        right: 2rem;
+        font-family: "Playfair Display", serif;
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: var(--border);
+        line-height: 1;
+        user-select: none;
+        transition: color 0.35s;
+      }
+      .section-num--sub {
+        font-size: 2.4rem;
+      }
+
+      /* ══════════════════════════════════════════
+       PROGRESS BAR
+    ══════════════════════════════════════════ */
+      .progress-bar-wrap {
+        position: fixed;
+        top: 0;
+        left: 264px;
+        right: 0;
+        height: 3px;
+        z-index: 200;
+      }
+      #progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.1s linear;
+      }
+
+      /* ══════════════════════════════════════════
+       BACK TO TOP
+    ══════════════════════════════════════════ */
+      #back-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 42px;
+        height: 42px;
+        background: var(--primary);
+        color: #0b1220;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.3s,
+          transform 0.2s,
+          background 0.35s;
+        z-index: 200;
+      }
+      #back-top.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
+      #back-top:hover {
+        transform: translateY(-2px);
+      }
+
+      /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+      footer {
+        margin-top: 5rem;
+        padding: 2rem 0 0;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        transition: border-color 0.35s;
+      }
+      .footer-left {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .footer-title {
+        font-family: "Playfair Display", serif;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text-main);
+        transition: color 0.35s;
+      }
+      .footer-sub {
+        font-size: 0.74rem;
+        color: var(--text-muted);
+        transition: color 0.35s;
+      }
+      .footer-right {
+        text-align: right;
+      }
+      .footer-copy {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-main);
+        transition: color 0.35s;
+      }
+      .footer-rights {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-top: 0.15rem;
+        transition: color 0.35s;
+      }
+
+      /* ══════════════════════════════════════════
+       MOBILE
+    ══════════════════════════════════════════ */
+      #menu-toggle {
+        display: none;
+      }
+
+      /* ══════════════════════════════════════════
+       CONTENT STYLES (inside cards)
+    ══════════════════════════════════════════ */
+
+      .content {
+        margin-top: 1.5rem;
+      }
+
+      /* intro paragraph */
+      .content .lead {
+        font-size: 1rem;
+        color: var(--text-main);
+        line-height: 1.85;
+        margin-bottom: 1.6rem;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px dashed var(--border);
+        transition:
+          color 0.35s,
+          border-color 0.35s;
+      }
+
+      /* bullet list */
+      .content ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        margin-bottom: 1.6rem;
+      }
+      .content ul li {
+        display: block;
+        font-size: 0.91rem;
+        color: var(--text-main);
+        line-height: 1.75;
+        padding-left: 1.5rem;
+        position: relative;
+        transition: color 0.35s;
+      }
+      .content ul li::before {
+        content: "→";
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 0.85rem;
+        position: absolute;
+        left: 0;
+        top: 0.18em;
+        transition: color 0.35s;
+      }
+      .content ul li b {
+        color: var(--primary);
+        font-weight: 600;
+        display: inline;
+      }
+      .example-box p b,
+      .info-box p b {
+        color: var(--text-main);
+        font-weight: 700;
+      }
+      .kw {
+        background: color-mix(in srgb, var(--primary) 10%, transparent);
+        color: var(--primary);
+        font-weight: 600;
+        padding: 0.1em 0.35em;
+        border-radius: 4px;
+        font-size: 0.92em;
+        display: inline;
+        transition:
+          background 0.35s,
+          color 0.35s;
+      }
+      .kw-green {
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 600;
+        padding: 0.1em 0.35em;
+        border-radius: 4px;
+        font-size: 0.92em;
+        display: inline;
+        transition:
+          background 0.35s,
+          color 0.35s;
+      }
+
+      /* example callout box */
+      .example-box {
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
+        border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+        border-left: 3px solid var(--accent);
+        border-radius: 8px;
+        padding: 1.1rem 1.4rem;
+        margin-top: 0.4rem;
+        margin-bottom: 1.5rem;
+        transition:
+          background 0.35s,
+          border-color 0.35s;
+      }
+      .example-box .ex-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 0.55rem;
+        transition: color 0.35s;
+      }
+      .example-box p {
+        font-size: 0.89rem;
+        color: var(--text-main);
+        line-height: 1.75;
+        transition: color 0.35s;
+      }
+      .example-box p b {
+        font-weight: 600;
+      }
+
+      /* info / note box */
+      .info-box {
+        background: color-mix(in srgb, var(--primary) 7%, transparent);
+        border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+        border-left: 3px solid var(--primary);
+        border-radius: 8px;
+        padding: 1.1rem 1.4rem;
+        margin-top: 0.4rem;
+        margin-bottom: 1.5rem;
+        transition:
+          background 0.35s,
+          border-color 0.35s;
+      }
+      .info-box .info-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.55rem;
+        transition: color 0.35s;
+      }
+      .info-box p {
+        font-size: 0.89rem;
+        color: var(--text-main);
+        line-height: 1.75;
+        transition: color 0.35s;
+      }
+      .info-box p b {
+        font-weight: 600;
+      }
+
+      /* sub-heading inside card */
+      .content h3 {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin: 2rem 0 0.85rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid var(--border);
+        transition:
+          color 0.35s,
+          border-color 0.35s;
+      }
+
+      /* compare table (NSE vs BSE) */
+      .table-scroll-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        margin-bottom: 1.25rem;
+        transition: border-color 0.35s;
+      }
+      .compare-table {
+        width: 100%;
+        min-width: 480px;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+        transition: border-color 0.35s;
+      }
+      .compare-table th {
+        background: color-mix(in srgb, var(--primary) 10%, transparent);
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        transition:
+          background 0.35s,
+          color 0.35s;
+      }
+      .compare-table th:first-child {
+        color: var(--text-muted);
+        background: transparent;
+      }
+      .compare-table td {
+        padding: 0.7rem 1rem;
+        border-top: 1px solid var(--border);
+        color: var(--text-main);
+        vertical-align: top;
+        line-height: 1.55;
+        transition:
+          color 0.35s,
+          border-color 0.35s;
+      }
+      .compare-table td:first-child {
+        font-weight: 600;
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+      .compare-table tr:hover td {
+        background: color-mix(in srgb, var(--primary) 4%, transparent);
+      }
+
+      /* nifty50 company pills */
+      .pill-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+      .pill {
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.25rem 0.7rem;
+        border-radius: 20px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-main);
+        transition:
+          background 0.35s,
+          border-color 0.35s,
+          color 0.35s;
+      }
+      .pill.hi {
+        background: var(--accent-soft);
+        border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ══════════════════════════════════════════
+       RESPONSIVE — Large tablets (≤1024px)
+    ══════════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        nav#sidebar {
+          width: 220px;
+        }
+        main {
+          margin-left: 220px;
+          max-width: calc(100vw - 220px);
+          padding: 3rem 3vw 6rem;
+        }
+        .progress-bar-wrap {
+          left: 220px;
+        }
+        .section-card {
+          padding: 2rem 2rem;
+        }
+        .hero h2 {
+          font-size: clamp(1.9rem, 4vw, 2.8rem);
+        }
+      }
+
+      /* ══════════════════════════════════════════
+       RESPONSIVE — Tablets (≤768px)
+    ══════════════════════════════════════════ */
+      @media (max-width: 768px) {
+        nav#sidebar {
+          transform: translateX(-264px);
+          width: 264px;
+          box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
+        }
+        nav#sidebar.open {
+          transform: translateX(0);
+        }
+        main {
+          margin-left: 0;
+          padding: 4.5rem 1.25rem 6rem;
+          max-width: 100vw;
+        }
+        .progress-bar-wrap {
+          left: 0;
+        }
+
+        #menu-toggle {
+          display: flex !important;
+          position: fixed;
+          top: 0.75rem;
+          left: 0.75rem;
+          z-index: 300;
+          background: var(--bg-nav);
+          border: none;
+          color: #fff;
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 1.2rem;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero {
+          margin-bottom: 2.5rem;
+          padding-bottom: 2rem;
+        }
+        .hero h2 {
+          font-size: clamp(1.7rem, 7vw, 2.4rem);
+        }
+        .hero > p {
+          font-size: 0.93rem;
+        }
+        .hero-meta {
+          width: 100%;
+        }
+        .hero-meta .stat {
+          padding: 0.85rem 1.25rem;
+          flex: 1;
+        }
+
+        .section-card {
+          padding: 1.5rem 1.25rem;
+          border-radius: 10px;
+        }
+        .section-num {
+          font-size: 2.2rem;
+          top: 1rem;
+          right: 1rem;
+        }
+
+        /* Scrollable tables on tablet */
+        .compare-table {
+          font-size: 0.78rem;
+        }
+        .compare-table th,
+        .compare-table td {
+          padding: 0.55rem 0.7rem;
+        }
+        .section-card > .content > table,
+        .content table {
+          display: block;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .table-scroll-wrapper {
+          border-radius: 8px;
+        }
+
+        .pill-grid {
+          gap: 0.35rem;
+        }
+        .pill {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.55rem;
+        }
+        .content .lead {
+          font-size: 0.93rem;
+        }
+        .content ul li {
+          font-size: 0.87rem;
+        }
+        .example-box,
+        .info-box {
+          padding: 0.9rem 1rem;
+          border-radius: 6px;
+        }
+
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+          margin-top: 3rem;
+        }
+        .footer-right {
+          text-align: left;
+        }
+
+        #back-top {
+          bottom: 1.25rem;
+          right: 1rem;
+          width: 38px;
+          height: 38px;
+        }
+        .search-container {
+          padding: 8px 1rem !important;
+        }
+        #searchInput {
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ══════════════════════════════════════════
+       RESPONSIVE — Mobile (≤480px)
+    ══════════════════════════════════════════ */
+      @media (max-width: 480px) {
+        main {
+          padding: 4rem 1rem 5rem;
+        }
+        .hero h2 {
+          font-size: clamp(1.5rem, 8vw, 2rem);
+          line-height: 1.2;
+        }
+        .hero-meta {
+          flex-direction: column;
+          width: 100%;
+        }
+        .hero-meta .stat {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding: 0.75rem 1rem;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .hero-meta .stat:last-child {
+          border-bottom: none;
+        }
+        .hero-meta .stat .val {
+          font-size: 1.2rem;
+        }
+
+        .section-card {
+          padding: 1.25rem 1rem;
+        }
+        .section-num {
+          font-size: 1.8rem;
+        }
+        .section-card h2 {
+          font-size: 1.25rem;
+          padding-right: 2.5rem;
+        }
+        .compare-table {
+          min-width: 360px;
+        }
+        .compare-table th,
+        .compare-table td {
+          padding: 0.45rem 0.55rem;
+          font-size: 0.74rem;
+        }
+        .compare-table td:first-child {
+          white-space: normal;
+          min-width: 90px;
+        }
+        .content h3 {
+          font-size: 0.72rem;
+        }
+        .chapter-label {
+          font-size: 0.56rem;
+          margin-top: 2.5rem;
+        }
+        .example-box p,
+        .info-box p {
+          font-size: 0.84rem;
+        }
+        #back-top {
+          bottom: 1rem;
+          right: 0.75rem;
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ══════════════════════════════════════════
+       RESPONSIVE — Very small phones (≤360px)
+    ══════════════════════════════════════════ */
+      @media (max-width: 360px) {
+        main {
+          padding: 3.75rem 0.75rem 5rem;
+        }
+        .section-card {
+          padding: 1rem 0.85rem;
+        }
+        .hero h2 {
+          font-size: 1.4rem;
+        }
+        nav#sidebar {
+          width: 100vw;
+        }
+      }
+
+      .highlight {
+        background-color: yellow;
+        display: inline;
+        border-radius: 2px;
+      }
+
+      /* ── ANGELONE CARD ── */
+      .angelone-card {
+        margin-top: 2rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 4px solid #ff6b00;
+        border-radius: 14px;
+        padding: 1.75rem 1.75rem 1.5rem;
+      }
+      .ao-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .ao-logo {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #ff6b00, #ff9a3c);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 0.9rem;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .ao-badge {
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ff6b00;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+      }
+      .ao-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+      .ao-desc {
+        font-size: 0.87rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+        margin-bottom: 1.1rem;
+      }
+      .ao-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.45rem;
+        margin-bottom: 1.25rem;
+      }
+      .ao-feat {
+        font-size: 0.82rem;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .ao-btn {
+        display: inline-block;
+        background: #ff6b00;
+        color: #ffffff !important;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 0.8rem 1.75rem;
+        border-radius: 9px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        box-shadow: 0 4px 14px rgba(255, 107, 0, 0.32);
+        margin-bottom: 0.85rem;
+      }
+      .ao-btn:hover {
+        background: #e05e00;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 20px rgba(255, 107, 0, 0.42);
+      }
+      .ao-note {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Progress bar -->
+    <div class="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+    <!-- Mobile toggle -->
+    <button id="menu-toggle" aria-label="Open menu">☰</button>
+
+    <!-- ══ SIDEBAR ══ -->
+    <nav id="sidebar" aria-label="Guide Navigation">
+      <div class="nav-brand">
+        <div class="badge-row">
+          <div class="badge-inner">
+            <span class="dot"></span>
+            <span class="nav-label">Master Guide</span>
+          </div>
+          <button
+            id="theme-toggle"
+            aria-label="Toggle dark/light mode"
+            data-tip="Toggle theme"
+          >
+            <span class="icon-moon">🌙</span>
+            <span class="icon-sun">☀️</span>
+          </button>
+        </div>
+        <h1>Stock Market<br />Foundations</h1>
+      </div>
+      <div class="search-container" style="padding: 10px; text-align: center">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search concepts (e.g. support, intraday, NIFTY...)"
+          style="
+            width: 90%;
+            max-width: 500px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+          "
+        />
+      </div>
+
+      <span class="nav-section-label">Fundamentals</span>
+      <a href="#introduction"><span class="num">01</span> Introduction</a>
+      <a href="#basics"><span class="num">02</span> Stock Market Basics</a>
+      <a href="#nse-bse"><span class="num">03</span> NSE &amp; BSE</a>
+      <a href="#nifty50"><span class="num">04</span> NIFTY 50</a>
+      <a href="#buying-selling"
+        ><span class="num">5.1</span> How Buying/Selling Works</a
+      >
+      <a href="#demat-account"><span class="num">5.2</span> Demat Account</a>
+      <a href="#market-participants"
+        ><span class="num">5.3</span> Market Participants</a
+      >
+      <a href="#order-types"><span class="num">6.1</span> Order Types</a>
+      <a href="#bid-ask"><span class="num">6.2</span> Bid &amp; Ask Price</a>
+      <a href="#volume"><span class="num">6.3</span> Volume</a>
+
+      <span class="nav-section-label">Technical Analysis</span>
+      <a href="#charts"><span class="num">7.1</span> Charts Basics</a>
+      <a href="#timeframes"><span class="num">7.2</span> Timeframes</a>
+      <a href="#candlesticks"
+        ><span class="num">08</span> Candlestick Patterns</a
+      >
+      <a href="#support-resistance"
+        ><span class="num">09</span> Support &amp; Resistance</a
+      >
+      <a href="#trend"><span class="num">10</span> Trend</a>
+      <a href="#indicators"><span class="num">11</span> Indicators</a>
+
+      <span class="nav-section-label">Strategy &amp; Mindset</span>
+      <a href="#risk"><span class="num">12</span> Risk Management</a>
+      <a href="#investing-trading"
+        ><span class="num">13</span> Investing vs Trading</a
+      >
+      <a href="#psychology"><span class="num">14</span> Psychology</a>
+    </nav>
+
+    <!-- ══ MAIN ══ -->
+    <main id="main-content">
+      <!-- Hero -->
+      <section class="hero">
+        <p class="eyebrow">⚡ Indian Stock Market · Complete Reference</p>
+        <h2>Your <em>complete</em> guide<br />to the stock market</h2>
+        <p>
+          A structured, beginner-friendly reference covering everything from
+          market fundamentals to trading psychology — built for the Indian
+          investor.
+        </p>
+        <div class="hero-meta">
+          <div class="stat">
+            <span class="val">14</span><span class="key">Chapters</span>
+          </div>
+          <div class="stat">
+            <span class="val">NSE &amp; BSE</span
+            ><span class="key">Exchanges</span>
+          </div>
+          <div class="stat">
+            <span class="val">∞</span><span class="key">Concepts</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Part 1 -->
+      <p class="chapter-label">Part 1 — Fundamentals</p>
+
+      <div class="section" id="introduction">
+        <div class="section-card">
+          <span class="section-num">01</span>
+          <span class="section-tag">Start Here</span>
+          <h2>Introduction</h2>
+          <div class="content">
+            <p class="lead">
+              Welcome! This guide is made for <b>complete beginners</b> — no
+              prior knowledge needed. We explain the Indian stock market in
+              plain, simple language with real-life examples.
+            </p>
+
+            <h3>What you will learn</h3>
+            <ul>
+              <li>What the <b>stock market</b> is and why it exists</li>
+              <li>How <b>NSE and BSE</b> — India's two big exchanges — work</li>
+              <li>
+                What <b>NIFTY 50</b> means and why everyone talks about it
+              </li>
+              <li>
+                How to <b>buy and sell</b> stocks using a broker app like
+                Zerodha or Groww
+              </li>
+              <li>How to <b>read charts</b> and understand price movement</li>
+              <li>
+                How to <b>manage risk</b> so you don't lose all your money
+              </li>
+              <li>
+                The difference between <b>investing</b> (long term) and
+                <b>trading</b> (short term)
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">💡 How to use this guide</div>
+              <p>
+                Read chapters <b>in order</b> if you are a total beginner.
+                Already know the basics? Jump directly to any chapter using the
+                menu on the left.
+              </p>
+            </div>
+
+            <h3>Who is this for?</h3>
+            <ul>
+              <li>
+                Anyone who has <b>heard about the stock market</b> but has no
+                idea where to start
+              </li>
+              <li>
+                Students, salaried people, or anyone who wants to
+                <b>grow their savings</b>
+              </li>
+              <li>
+                People who tried trading before but <b>lost money</b> and want
+                to understand what went wrong
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🇮🇳 Real-life moment</div>
+              <p>
+                You hear on the news: <b>"NIFTY fell 500 points today."</b> Most
+                beginners have no idea what that means. By the end of this
+                guide, you will understand exactly what happened — and why it
+                matters to your money.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="basics">
+        <div class="section-card">
+          <span class="section-num">02</span>
+          <span class="section-tag">Foundation</span>
+          <h2>What is the Stock Market?</h2>
+          <div class="content">
+            <p class="lead">
+              The stock market is simply a place where people
+              <b>buy and sell small pieces of companies</b>. These small pieces
+              are called <b>shares</b> or <b>stocks</b>.
+            </p>
+
+            <div class="example-box">
+              <div class="ex-label">🏪 Simple example</div>
+              <p>
+                Imagine a <b>chai shop</b> needs ₹1,00,000 to expand. Instead of
+                a bank loan, the owner sells 1,000 pieces (shares) at ₹100 each.
+                You buy 10 shares for ₹1,000 — now you own
+                <b>1% of the chai shop</b>. If the shop becomes worth ₹2,00,000
+                — your shares are now worth ₹2,000. That's how stocks work.
+              </p>
+            </div>
+
+            <!-- VISUAL: How the stock market works -->
+            <div style="margin:1.5rem 0 1.75rem;padding:1.5rem 1.25rem 1.25rem;background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:1.1rem;">📊 How the stock market works</div>
+              <svg viewBox="0 0 560 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Company box -->
+                <rect x="10" y="30" width="100" height="50" rx="8" fill="#021779" opacity="0.9"/>
+                <text x="60" y="52" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">COMPANY</text>
+                <text x="60" y="65" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">(e.g. Reliance)</text>
+                <text x="60" y="77" text-anchor="middle" font-size="7.5" fill="#10b981">Issues shares</text>
+                <!-- Arrow 1 -->
+                <line x1="110" y1="55" x2="148" y2="55" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <polygon points="148,51 156,55 148,59" fill="currentColor" opacity="0.35"/>
+                <!-- Exchange box -->
+                <rect x="156" y="20" width="110" height="70" rx="8" fill="color-mix(in srgb,var(--primary) 12%,transparent)" stroke="color-mix(in srgb,var(--primary) 30%,transparent)" stroke-width="1"/>
+                <text x="211" y="43" text-anchor="middle" font-size="9" font-weight="700" fill="var(--primary)">EXCHANGE</text>
+                <text x="211" y="57" text-anchor="middle" font-size="8" fill="var(--text-muted)">NSE / BSE</text>
+                <text x="211" y="70" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Order matching</text>
+                <text x="211" y="81" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">T+1 settlement</text>
+                <!-- Arrow 2 -->
+                <line x1="266" y1="55" x2="304" y2="55" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <polygon points="304,51 312,55 304,59" fill="currentColor" opacity="0.35"/>
+                <!-- Broker box -->
+                <rect x="312" y="25" width="100" height="60" rx="8" fill="color-mix(in srgb,var(--accent) 10%,transparent)" stroke="color-mix(in srgb,var(--accent) 30%,transparent)" stroke-width="1"/>
+                <text x="362" y="47" text-anchor="middle" font-size="9" font-weight="700" fill="var(--accent)">BROKER</text>
+                <text x="362" y="60" text-anchor="middle" font-size="8" fill="var(--text-muted)">Zerodha</text>
+                <text x="362" y="72" text-anchor="middle" font-size="8" fill="var(--text-muted)">Groww · Angel</text>
+                <!-- Arrow 3 -->
+                <line x1="412" y1="55" x2="450" y2="55" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <polygon points="450,51 458,55 450,59" fill="currentColor" opacity="0.35"/>
+                <!-- Investor box -->
+                <rect x="458" y="30" width="92" height="50" rx="8" fill="#10b981" opacity="0.85"/>
+                <text x="504" y="51" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">YOU</text>
+                <text x="504" y="64" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.8)">(Investor)</text>
+                <text x="504" y="75" text-anchor="middle" font-size="7.5" fill="rgba(255,255,255,0.9)">Own shares</text>
+                <!-- SEBI label above -->
+                <text x="280" y="12" text-anchor="middle" font-size="8" fill="var(--text-muted)" font-style="italic">Regulated by SEBI — Securities &amp; Exchange Board of India</text>
+                <line x1="100" y1="10" x2="460" y2="10" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/>
+              </svg>
+            </div>
+
+            <h3>Key terms you must know</h3>
+            <ul>
+              <li>
+                <b>Share / Stock</b> — A small ownership piece of a company
+              </li>
+              <li>
+                <b>Shareholder</b> — A person who owns shares of a company
+              </li>
+              <li>
+                <b>Market Price</b> — The current price at which a share is
+                being bought/sold
+              </li>
+              <li>
+                <b>Profit (Capital Gain)</b> — When you sell a share higher than
+                you bought it
+              </li>
+              <li>
+                <b>Loss</b> — When you sell a share lower than you bought it
+              </li>
+              <li>
+                <b>Dividend</b> — Some companies share a part of their profit
+                with shareholders (like a bonus)
+              </li>
+              <li>
+                <b>Portfolio</b> — The full collection of all stocks you own
+              </li>
+            </ul>
+
+            <h3>Why do share prices go up or down?</h3>
+            <ul>
+              <li>
+                More people <b>want to buy</b> a stock →
+                <span class="kw-green">price rises ↑</span>
+              </li>
+              <li>
+                More people <b>want to sell</b> a stock →
+                <span class="kw">price falls ↓</span>
+              </li>
+              <li>
+                Strong company results, positive news, or economic growth →
+                price tends to go <span class="kw-green">up</span>
+              </li>
+              <li>
+                Bad results, scandals, or economic uncertainty → price tends to
+                go <span class="kw">down</span>
+              </li>
+            </ul>
+
+            <h3>Who are the key players?</h3>
+            <ul>
+              <li>
+                <b>Companies</b> — List their shares on the exchange to raise
+                money
+              </li>
+              <li>
+                <b>Retail Investors</b> — Normal people like you and me
+                investing small amounts
+              </li>
+              <li>
+                <b>Institutional Investors</b> — Big organisations like mutual
+                funds and insurance companies
+              </li>
+              <li>
+                <b>Brokers</b> — Middlemen like Zerodha, angelone, Groww, or
+                Upstox that let you buy/sell
+              </li>
+              <li>
+                <span class="kw">SEBI</span> — The
+                <b>Securities and Exchange Board of India</b>. The regulator
+                that makes rules, investigates fraud, and protects investors
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">📌 Important</div>
+              <p>
+                When you buy a share, you become a <b>part-owner</b> of that
+                company. You make money when it does well — and lose money when
+                it doesn't. Stock investing always carries <b>risk</b>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="nse-bse">
+        <div class="section-card">
+          <span class="section-num">03</span>
+          <span class="section-tag">India Specific</span>
+          <h2>NSE &amp; BSE — India's Two Stock Exchanges</h2>
+          <div class="content">
+            <p class="lead">
+              India has two major stock exchanges where shares are bought and
+              sold every day — <b>NSE</b> and <b>BSE</b>. Think of them like two
+              big marketplaces for stocks.
+            </p>
+
+            <ul>
+              <li>
+                <b>BSE</b> stands for <b>Bombay Stock Exchange</b> — established
+                in <b>1875</b>, it is Asia's oldest stock exchange, located in
+                Mumbai
+              </li>
+              <li>
+                <b>NSE</b> stands for <b>National Stock Exchange</b> —
+                established in <b>1992</b>, it is India's largest exchange by
+                trading volume
+              </li>
+              <li>
+                Both are regulated by <b>SEBI</b> (Securities and Exchange Board
+                of India)
+              </li>
+              <li>Most big companies are listed on <b>both</b> exchanges</li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🏬 Simple analogy</div>
+              <p>
+                Think of NSE and BSE like two different
+                <b>shopping malls</b> selling the same brands (companies). You
+                can buy Reliance shares from either mall — the price is almost
+                the same. NSE is the <b>bigger, busier mall</b> today.
+              </p>
+            </div>
+
+            <h3>NSE vs BSE — Quick comparison</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>NSE</th>
+                    <th>BSE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Full Name</td>
+                    <td>National Stock Exchange</td>
+                    <td>Bombay Stock Exchange</td>
+                  </tr>
+                  <tr>
+                    <td>Founded</td>
+                    <td>1992</td>
+                    <td>1875</td>
+                  </tr>
+                  <tr>
+                    <td>Location</td>
+                    <td>Mumbai</td>
+                    <td>Mumbai</td>
+                  </tr>
+                  <tr>
+                    <td>Main Index</td>
+                    <td><b>NIFTY 50</b></td>
+                    <td><b>SENSEX</b></td>
+                  </tr>
+                  <tr>
+                    <td>No. of Listed Companies</td>
+                    <td>~2,000+</td>
+                    <td>~5,000+</td>
+                  </tr>
+                  <tr>
+                    <td>Trading Volume</td>
+                    <td>Higher (more popular)</td>
+                    <td>Lower</td>
+                  </tr>
+                  <tr>
+                    <td>Used for</td>
+                    <td>Stocks, F&amp;O, Currency</td>
+                    <td>Stocks, SME trading</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Which one should beginners use?</h3>
+            <ul>
+              <li>
+                For most beginners, <b>NSE is the go-to exchange</b> — higher
+                liquidity means easier buying and selling
+              </li>
+              <li>
+                Your broker app (Zerodha, Groww, etc.) lets you choose which
+                exchange to trade on
+              </li>
+              <li>
+                For large-cap stocks, the
+                <b>price difference between NSE and BSE is tiny</b> (fractions
+                of a rupee)
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">📌 Did you know?</div>
+              <p>
+                BSE's <b>SENSEX</b> tracks the top 30 companies. NSE's
+                <b>NIFTY 50</b> tracks the top 50 companies. Both are used as a
+                <b>health indicator</b> of the Indian economy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="nifty50">
+        <div class="section-card">
+          <span class="section-num">04</span>
+          <span class="section-tag">Index</span>
+          <h2>NIFTY 50 — India's Most Famous Index</h2>
+          <div class="content">
+            <p class="lead">
+              <b>NIFTY 50</b> is a number that tells you how India's top 50
+              companies are performing <b>right now</b>. When people say "the
+              market is up today" — they usually mean NIFTY 50 went up.
+            </p>
+
+            <div class="example-box">
+              <div class="ex-label">🌡️ Real-life analogy</div>
+              <p>
+                Think of NIFTY 50 like a <b>class result average</b>. If the
+                class average goes up, most students did well. If it goes down,
+                most students struggled. NIFTY 50 is the
+                <b>average performance of India's top 50 companies</b>.
+              </p>
+            </div>
+
+            <h3>What exactly is NIFTY 50?</h3>
+            <ul>
+              <li>
+                It is a <b>stock market index</b> maintained by
+                <span class="kw">NSE</span> — the National Stock Exchange of
+                India
+              </li>
+              <li>
+                It tracks the <b>top 50 companies</b> listed on NSE, chosen by
+                <b>market size</b> (largest companies)
+              </li>
+              <li>
+                These 50 companies span <b>13 different sectors</b> — banking,
+                IT, pharma, energy, FMCG, and more
+              </li>
+              <li>
+                The index is reviewed <b>every 6 months</b> — underperforming
+                companies can be removed, stronger ones added
+              </li>
+              <li>
+                It started at a base value of <span class="kw">1,000</span> in
+                <b>November 1995</b> — it has since grown many-fold (to
+                approximately <span class="kw">22,000+</span> as of recent
+                years), reflecting India's long-term economic growth
+              </li>
+            </ul>
+
+            <h3>Some companies in NIFTY 50 right now</h3>
+            <div class="pill-grid">
+              <span class="pill hi">Reliance</span>
+              <span class="pill hi">TCS</span>
+              <span class="pill hi">HDFC Bank</span>
+              <span class="pill hi">Infosys</span>
+              <span class="pill hi">ICICI Bank</span>
+              <span class="pill">Wipro</span>
+              <span class="pill">SBI</span>
+              <span class="pill">Bajaj Finance</span>
+              <span class="pill">HUL</span>
+              <span class="pill">Tata Motors</span>
+              <span class="pill">Asian Paints</span>
+              <span class="pill">Maruti</span>
+              <span class="pill">L&amp;T</span>
+              <span class="pill">Sun Pharma</span>
+              <span class="pill">Adani Ports</span>
+              <span class="pill">+ 35 more</span>
+            </div>
+
+            <!-- VISUAL: NIFTY 50 sector breakdown bar chart -->
+            <div style="margin:1.25rem 0 1.75rem;padding:1.25rem;background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:1rem;">🏭 NIFTY 50 — key sectors represented</div>
+              <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Bars -->
+                <!-- Financials 33% -->
+                <rect x="60" y="20" width="165" height="18" rx="4" fill="#021779" opacity="0.85"/>
+                <text x="56" y="33" text-anchor="end" font-size="8.5" fill="var(--text-muted)">Financials</text>
+                <text x="232" y="33" font-size="8.5" fill="var(--primary)" font-weight="700">~33%</text>
+                <!-- IT 14% -->
+                <rect x="60" y="46" width="70" height="18" rx="4" fill="#0d47a1" opacity="0.75"/>
+                <text x="56" y="59" text-anchor="end" font-size="8.5" fill="var(--text-muted)">IT</text>
+                <text x="136" y="59" font-size="8.5" fill="var(--primary)" font-weight="700">~14%</text>
+                <!-- Energy 12% -->
+                <rect x="60" y="72" width="60" height="18" rx="4" fill="#10b981" opacity="0.75"/>
+                <text x="56" y="85" text-anchor="end" font-size="8.5" fill="var(--text-muted)">Energy</text>
+                <text x="126" y="85" font-size="8.5" fill="var(--accent)" font-weight="700">~12%</text>
+                <!-- Consumer 10% -->
+                <rect x="60" y="98" width="50" height="18" rx="4" fill="#10b981" opacity="0.55"/>
+                <text x="56" y="111" text-anchor="end" font-size="8.5" fill="var(--text-muted)">Consumer</text>
+                <text x="116" y="111" font-size="8.5" fill="var(--accent)" font-weight="700">~10%</text>
+                <!-- Auto 6% -->
+                <rect x="60" y="124" width="30" height="18" rx="4" fill="var(--border)"/>
+                <text x="56" y="137" text-anchor="end" font-size="8.5" fill="var(--text-muted)">Auto</text>
+                <text x="96" y="137" font-size="8.5" fill="var(--text-muted)" font-weight="600">~6%</text>
+                <!-- Others label -->
+                <text x="280" y="85" font-size="8" fill="var(--text-muted)" font-style="italic">+ Pharma, Metals, Cement,</text>
+                <text x="280" y="97" font-size="8" fill="var(--text-muted)" font-style="italic">Infra, Telecom &amp; more…</text>
+                <text x="280" y="115" font-size="7.5" fill="var(--text-muted)">Weightings are approximate</text>
+                <text x="280" y="126" font-size="7.5" fill="var(--text-muted)">and reviewed every 6 months</text>
+              </svg>
+            </div>
+
+            <h3>How is NIFTY 50 calculated?</h3>
+            <ul>
+              <li>
+                It uses a method called
+                <b>Free-Float Market Capitalisation</b> — bigger companies have
+                more impact on the index
+              </li>
+              <li>
+                <b>Reliance, TCS, and HDFC Bank</b> are among the biggest — if
+                their price moves, NIFTY moves a lot
+              </li>
+              <li>
+                If all 50 stocks go up → NIFTY goes <b>up</b>. If most fall →
+                NIFTY goes <b>down</b>
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📈 Real number example</div>
+              <p>
+                If NIFTY 50 is at approximately <b>22,500</b> today and goes to
+                around <b>23,000</b> tomorrow, that's a rise of
+                <b>~500 points (~2.2%)</b>. Your mutual fund or index fund that
+                tracks NIFTY would also grow by roughly 2.2%.
+              </p>
+            </div>
+
+            <h3>Why does NIFTY 50 matter to you?</h3>
+            <ul>
+              <li>
+                It shows the <b>overall mood of the Indian stock market</b> at a
+                glance
+              </li>
+              <li>
+                Most <b>mutual funds and index funds</b> in India track NIFTY 50
+              </li>
+              <li>
+                When NIFTY rises over years,
+                <b>long-term investors grow their wealth</b>
+              </li>
+              <li>
+                Traders use NIFTY to take positions in
+                <b>Futures &amp; Options (F&amp;O)</b>
+              </li>
+              <li>
+                It is used by the <b>government and RBI</b> as an economic
+                health indicator
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">💡 NIFTY vs SENSEX</div>
+              <p>
+                <b>NIFTY 50</b> = NSE's index of top 50 companies.
+                <b>SENSEX</b> = BSE's index of top 30 companies. Both move in
+                the same direction most of the time. NIFTY is more widely used
+                for <b>trading and analysis</b> in India today.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="buying-selling">
+        <div class="section-card">
+          <span class="section-num">5.1</span>
+          <span class="section-tag">Mechanics</span>
+          <h2>How Buying &amp; Selling Works</h2>
+          <div class="content">
+            <p class="lead">
+              Buying a stock is simpler than it sounds. You pick a company,
+              place an order through an app, and in seconds — you own a small
+              piece of that company.
+            </p>
+
+            <h3>Step-by-step: buying your first share</h3>
+            <ul>
+              <li>
+                <b>Step 1 — Open a Demat + Trading account</b> with a broker
+                like Zerodha, AngelOne, Groww, or Upstox
+              </li>
+              <li>
+                <b>Step 2 — Add money</b> to your account via UPI or net banking
+              </li>
+              <li>
+                <b>Step 3 — Search for a stock</b> — e.g., type "TCS" in the app
+              </li>
+              <li>
+                <b>Step 4 — Place a Buy order</b> — choose how many shares and
+                at what price
+              </li>
+              <li>
+                <b>Step 5 — Order executes</b> — the stock exchange matches your
+                buy with someone else's sell
+              </li>
+              <li>
+                <b>Step 6 — Shares land in your Demat account</b> within T+1 day
+                (next trading day)
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📦 Real example</div>
+              <p>
+                Say a TCS share is trading at around <b>₹3,800</b> (example
+                price). You buy <b>2 shares → you pay approx. ₹7,600</b>. If TCS
+                rises to around ₹4,000, your 2 shares are now worth ~₹8,000 — a
+                <b>profit of approx. ₹400</b>. To book that profit, you simply
+                <b>sell</b> the shares.
+              </p>
+            </div>
+
+            <h3>What happens behind the scenes?</h3>
+            <ul>
+              <li>Your order goes to the <b>stock exchange (NSE or BSE)</b></li>
+              <li>
+                The exchange finds a <b>seller</b> willing to sell at your price
+                — this is called <b>order matching</b>
+              </li>
+              <li>
+                Money moves from your account to the seller; shares move from
+                the seller to you
+              </li>
+              <li>
+                This whole process is called <b>settlement</b> — in India it
+                takes <span class="kw">T+1 day</span> (trade day + 1 working
+                day)
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">💡 T+1 Settlement</div>
+              <p>
+                If you buy shares on <b>Monday</b>, the shares will officially
+                be in your Demat account by <b>Tuesday</b>. This is what "T+1"
+                means — trade date plus 1 working day. You can still sell on the
+                same day though — that's called <b>intraday trading</b>.
+              </p>
+            </div>
+
+            <!-- VISUAL: Order flow step diagram -->
+            <div style="margin:1.25rem 0 1.5rem;padding:1.25rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1rem;">⚡ Your order — step by step</div>
+              <svg viewBox="0 0 540 58" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Step 1 -->
+                <circle cx="40" cy="24" r="14" fill="#10b981" opacity="0.9"/>
+                <text x="40" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">1</text>
+                <text x="40" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">You tap</text>
+                <text x="40" y="55" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Buy</text>
+                <!-- Arrow -->
+                <line x1="54" y1="24" x2="88" y2="24" stroke="var(--border)" stroke-width="1.5"/>
+                <polygon points="88,20 96,24 88,28" fill="var(--border)"/>
+                <!-- Step 2 -->
+                <circle cx="110" cy="24" r="14" fill="#021779" opacity="0.85"/>
+                <text x="110" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">2</text>
+                <text x="110" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Broker</text>
+                <text x="110" y="55" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">routes it</text>
+                <!-- Arrow -->
+                <line x1="124" y1="24" x2="158" y2="24" stroke="var(--border)" stroke-width="1.5"/>
+                <polygon points="158,20 166,24 158,28" fill="var(--border)"/>
+                <!-- Step 3 -->
+                <circle cx="180" cy="24" r="14" fill="#021779" opacity="0.75"/>
+                <text x="180" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">3</text>
+                <text x="180" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">NSE/BSE</text>
+                <text x="180" y="55" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">matches</text>
+                <!-- Arrow -->
+                <line x1="194" y1="24" x2="228" y2="24" stroke="var(--border)" stroke-width="1.5"/>
+                <polygon points="228,20 236,24 228,28" fill="var(--border)"/>
+                <!-- Step 4 -->
+                <circle cx="250" cy="24" r="14" fill="#0d47a1" opacity="0.75"/>
+                <text x="250" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">4</text>
+                <text x="250" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Seller</text>
+                <text x="250" y="55" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">found</text>
+                <!-- Arrow -->
+                <line x1="264" y1="24" x2="298" y2="24" stroke="var(--border)" stroke-width="1.5"/>
+                <polygon points="298,20 306,24 298,28" fill="var(--border)"/>
+                <!-- Step 5 -->
+                <circle cx="320" cy="24" r="14" fill="#10b981" opacity="0.75"/>
+                <text x="320" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">5</text>
+                <text x="320" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Money</text>
+                <text x="320" y="55" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">moves</text>
+                <!-- Arrow -->
+                <line x1="334" y1="24" x2="368" y2="24" stroke="var(--border)" stroke-width="1.5"/>
+                <polygon points="368,20 376,24 368,28" fill="var(--border)"/>
+                <!-- Step 6 -->
+                <circle cx="395" cy="24" r="14" fill="#10b981" opacity="0.9"/>
+                <text x="395" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">6</text>
+                <text x="395" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Shares in</text>
+                <text x="395" y="55" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Demat T+1</text>
+                <!-- Label -->
+                <text x="460" y="22" font-size="8" fill="var(--text-muted)">Done! You</text>
+                <text x="460" y="33" font-size="8" fill="var(--text-muted)">own shares</text>
+                <text x="460" y="44" font-size="8" fill="#10b981" font-weight="600">🎉</text>
+              </svg>
+            </div>
+
+            <h3>Bid price vs Ask price</h3>
+            <ul>
+              <li>
+                <b>Bid price</b> — the highest price a buyer is willing to pay
+                right now
+              </li>
+              <li>
+                <b>Ask price</b> — the lowest price a seller is willing to
+                accept right now
+              </li>
+              <li>
+                The difference between them is the <b>spread</b> — usually very
+                small for popular stocks
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🔢 Quick example</div>
+              <p>
+                Say Infosys has a Bid of <b>₹1,500</b> | Ask of
+                <b>₹1,501</b> (example). If you place a market buy order, you'll
+                buy at <b>₹1,501</b> (the ask). If you sell, you'll get
+                <b>₹1,500</b> (the bid). The ₹1 gap is the spread.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demat Account -->
+      <div class="section" id="demat-account">
+        <div class="section-card">
+          <span class="section-num section-num--sub">5.2</span>
+          <span class="section-tag">Account</span>
+          <h2>Demat Account</h2>
+          <div class="content">
+            <p class="lead">
+              Just like a bank account holds your money, a
+              <b>Demat account holds your shares</b> in digital (electronic)
+              form. "Demat" is short for <b>Dematerialised</b> — meaning no
+              physical share certificates.
+            </p>
+
+            <div class="example-box">
+              <div class="ex-label">🏦 Simple analogy</div>
+              <p>
+                Think of a Demat account like your <b>locker at the bank</b>.
+                When you buy shares of Reliance, those shares get stored in your
+                Demat locker digitally. When you sell, they leave the locker.
+                You never touch a paper certificate.
+              </p>
+            </div>
+
+            <h3>Three accounts you actually need</h3>
+            <ul>
+              <li>
+                <b>Bank Account</b> — holds your money (you already have this)
+              </li>
+              <li>
+                <b>Trading Account</b> — used to place buy/sell orders on the
+                exchange
+              </li>
+              <li><b>Demat Account</b> — stores the shares you own</li>
+            </ul>
+
+            <!-- VISUAL: 3-account structure -->
+            <div style="margin:0.5rem 0 1.25rem;padding:1.25rem 1rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:0.85rem;">🏦 How your three accounts connect</div>
+              <svg viewBox="0 0 500 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Bank account -->
+                <rect x="10" y="18" width="130" height="44" rx="8" fill="#021779" opacity="0.85"/>
+                <text x="75" y="36" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">🏦 BANK</text>
+                <text x="75" y="49" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.75)">Holds your ₹</text>
+                <text x="75" y="60" text-anchor="middle" font-size="7.5" fill="rgba(255,255,255,0.6)">HDFC / SBI etc.</text>
+                <!-- Arrow 1 -->
+                <line x1="140" y1="40" x2="172" y2="40" stroke="var(--accent)" stroke-width="1.5"/>
+                <polygon points="172,36 180,40 172,44" fill="var(--accent)"/>
+                <text x="160" y="35" text-anchor="middle" font-size="7" fill="var(--accent)">funds</text>
+                <!-- Trading account -->
+                <rect x="180" y="14" width="140" height="52" rx="8" fill="color-mix(in srgb,var(--accent) 12%,transparent)" stroke="var(--accent)" stroke-width="1.2"/>
+                <text x="250" y="34" text-anchor="middle" font-size="9" font-weight="700" fill="var(--accent)">💻 TRADING</text>
+                <text x="250" y="47" text-anchor="middle" font-size="8" fill="var(--text-muted)">Place buy/sell orders</text>
+                <text x="250" y="58" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">via broker app</text>
+                <!-- Arrow 2 -->
+                <line x1="320" y1="40" x2="352" y2="40" stroke="var(--primary)" stroke-width="1.5"/>
+                <polygon points="352,36 360,40 352,44" fill="var(--primary)" opacity="0.7"/>
+                <text x="340" y="35" text-anchor="middle" font-size="7" fill="var(--primary)" opacity="0.8">shares</text>
+                <!-- Demat account -->
+                <rect x="360" y="18" width="130" height="44" rx="8" fill="#10b981" opacity="0.8"/>
+                <text x="425" y="36" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">📂 DEMAT</text>
+                <text x="425" y="49" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.85)">Stores your shares</text>
+                <text x="425" y="60" text-anchor="middle" font-size="7.5" fill="rgba(255,255,255,0.7)">CDSL / NSDL</text>
+                <!-- Broker label -->
+                <text x="250" y="78" text-anchor="middle" font-size="7.5" fill="var(--text-muted)" font-style="italic">Broker opens all 3 together — Zerodha, Groww, Angel One</text>
+              </svg>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 Good news</div>
+              <p>
+                When you sign up with a broker like
+                <b>Zerodha, Groww, or Angel One</b>, they open all three
+                accounts together in one go. You don't need to visit a bank or
+                CDSL/NSDL separately.
+              </p>
+            </div>
+
+            <h3>Who maintains Demat accounts in India?</h3>
+            <ul>
+              <li>
+                <b>NSDL</b> (National Securities Depository Ltd) — linked to NSE
+              </li>
+              <li>
+                <b>CDSL</b> (Central Depository Services Ltd) — linked to BSE
+              </li>
+              <li>
+                Your broker connects to one of these two. Your shares are safely
+                held there — <b>even if your broker shuts down</b>, your shares
+                are safe
+              </li>
+            </ul>
+
+            <h3>What can a Demat account hold?</h3>
+            <ul>
+              <li>
+                <b>Stocks</b> — shares of companies like TCS, Reliance, HDFC
+                Bank
+              </li>
+              <li><b>Mutual Fund units</b></li>
+              <li><b>ETFs</b> (Exchange Traded Funds)</li>
+              <li><b>Bonds and Government Securities</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Market Participants -->
+      <div class="section" id="market-participants">
+        <div class="section-card">
+          <span class="section-num section-num--sub">5.3</span>
+          <span class="section-tag">Players</span>
+          <h2>Market Participants</h2>
+          <div class="content">
+            <p class="lead">
+              The stock market isn't just you and a computer. Many types of
+              players buy and sell every day — each with different goals, money
+              sizes, and strategies.
+            </p>
+
+            <h3>1. Retail Investors (That's you!)</h3>
+            <ul>
+              <li>
+                Individuals like you and me who invest
+                <b>their own personal money</b>
+              </li>
+              <li>
+                Usually trade in small quantities — buying 5, 10, or 50 shares
+                at a time
+              </li>
+              <li>
+                Use apps like <b>Groww, AngelOne, Zerodha, Upstox</b> to place
+                orders
+              </li>
+              <li>
+                Make up a <b>large number</b> of market participants but a
+                <b>smaller share</b> of total traded value
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">👤 Example</div>
+              <p>
+                Rahul, a software engineer in Pune, buys
+                <b>10 shares of HDFC Bank</b> using the AngelOne app every month
+                as part of his SIP. He is a retail investor.
+              </p>
+            </div>
+
+            <h3>2. Institutional Investors (The big fish)</h3>
+            <ul>
+              <li>
+                Large organisations that invest
+                <b>crores and thousands of crores</b> of rupees
+              </li>
+              <li>
+                <b>Mutual Funds</b> — collect money from lakhs of retail
+                investors and invest it together
+              </li>
+              <li>
+                <b>FIIs / FPIs</b> (Foreign Institutional Investors) — overseas
+                funds investing in India (e.g. BlackRock, Vanguard)
+              </li>
+              <li>
+                <b>DIIs</b> (Domestic Institutional Investors) — Indian entities
+                like LIC, SBI Mutual Fund
+              </li>
+              <li>
+                When FIIs <b>sell heavily</b>, markets often fall. When they
+                <b>buy</b>, markets rise. Watch FII/DII data to understand big
+                moves.
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">📊 Why it matters</div>
+              <p>
+                If you see news saying
+                <b>"FIIs sold ₹3,000 crore worth of shares today"</b> — that's
+                why NIFTY fell 300 points. Big institutions move the market.
+                Retail investors mostly follow the trend.
+              </p>
+            </div>
+
+            <h3>3. Brokers (The middlemen)</h3>
+            <ul>
+              <li>
+                Brokers are the
+                <b>gateway between you and the stock exchange</b>
+              </li>
+              <li>
+                You cannot directly trade on NSE or BSE — you must go through a
+                SEBI-registered broker
+              </li>
+              <li>
+                <b>Discount brokers</b> — low cost, app-based: Zerodha, Groww,
+                Upstox, Angel One
+              </li>
+              <li>
+                <b>Full-service brokers</b> — offer advice + research, higher
+                fees: ICICI Direct, HDFC Securities
+              </li>
+              <li>
+                Brokers earn through <b>brokerage fees</b> — a small amount
+                charged per trade
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🔁 How it flows</div>
+              <p>
+                You open AngelOne (broker) → tap Buy on Infosys → AngelOne sends
+                your order to <b>NSE</b> → NSE matches it with a seller → shares
+                come to your <b>Demat account</b>. AngelOne charges you a tiny
+                fee for this service.
+              </p>
+            </div>
+
+            <h3>Quick summary</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Participant</th>
+                    <th>Who they are</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Retail Investor</td>
+                    <td>Individual person investing own money</td>
+                    <td>You, Rahul, Priya</td>
+                  </tr>
+                  <tr>
+                    <td>Mutual Fund</td>
+                    <td>Pools money from many retail investors</td>
+                    <td>SBI Bluechip Fund, HDFC Flexi Cap</td>
+                  </tr>
+                  <tr>
+                    <td>FII / FPI</td>
+                    <td>Foreign fund investing in India</td>
+                    <td>BlackRock, Vanguard</td>
+                  </tr>
+                  <tr>
+                    <td>DII</td>
+                    <td>Indian institution investing in markets</td>
+                    <td>LIC, SBI MF, EPFO</td>
+                  </tr>
+                  <tr>
+                    <td>Broker</td>
+                    <td>Middleman connecting you to the exchange</td>
+                    <td>Zerodha, Groww, ICICI Direct</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="order-types">
+        <div class="section-card">
+          <span class="section-num">6.1</span>
+          <span class="section-tag">Execution</span>
+          <h2>Order Types</h2>
+          <div class="content">
+            <p class="lead">
+              When you tap "Buy" on your broker app, you need to choose
+              <b>what kind of order</b> to place. The three most important ones
+              are Market Order, Limit Order, and Stop Loss.
+            </p>
+
+            <h3>1. Market Order — Buy/Sell right now</h3>
+            <ul>
+              <li>
+                You say:
+                <b
+                  >"Buy this stock immediately at whatever price it's trading
+                  at"</b
+                >
+              </li>
+              <li>Order fills <b>instantly</b> — you don't wait</li>
+              <li>
+                Best for <b>large, liquid stocks</b> where price won't jump much
+              </li>
+              <li>Downside: you don't control the exact price you pay</li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📈 NIFTY example</div>
+              <p>
+                Say NIFTY is around <b>24,200</b> (example). You place a market
+                buy order on a NIFTY ETF. Your order fills almost immediately at
+                roughly <b>₹24,202</b> — slightly higher because of the spread
+                and real-time price movement. You got in fast, but not at an
+                exact price.
+              </p>
+            </div>
+
+            <h3>2. Limit Order — Buy/Sell only at your price</h3>
+            <ul>
+              <li>
+                You say: <b>"Buy only if the price comes down to ₹X"</b> (or
+                sell only if it rises to ₹X)
+              </li>
+              <li>
+                Your order sits in the queue and waits — it may or may not fill
+              </li>
+              <li>
+                You get <b>price control</b> but no guarantee the order will
+                execute
+              </li>
+              <li>Best when you have a specific entry price in mind</li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📉 NIFTY example</div>
+              <p>
+                Say NIFTY is around <b>24,200</b> but you want to buy only at
+                <b>24,000</b>. You place a <b>limit buy at 24,000</b>. If NIFTY
+                dips to 24,000, your order fires automatically. If it never
+                reaches 24,000 that day, your order expires unfilled.
+              </p>
+            </div>
+
+            <h3>3. Stop Loss Order — Protect yourself from big losses</h3>
+            <ul>
+              <li>
+                You already own a stock. You set a
+                <b>trigger price below your buy price</b>
+              </li>
+              <li>
+                If the stock falls to that price, it
+                <b>automatically sells</b> — cutting your loss
+              </li>
+              <li>
+                Think of it as an <b>emergency exit</b> that works even when
+                you're not watching
+              </li>
+              <li>
+                Every serious trader uses stop losses — it is
+                <b>non-negotiable</b>
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🛡️ NIFTY example</div>
+              <p>
+                Say you buy a NIFTY ETF at around <b>₹24,000</b>. You place a
+                stop loss at <b>₹23,700</b> (approx. 1.25% below). If NIFTY
+                crashes to 23,700, your ETF is sold automatically. You lose
+                roughly ₹300 per unit — but you avoid a much larger loss if the
+                crash continues.
+              </p>
+            </div>
+
+            <h3>Quick comparison</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Order Type</th>
+                    <th>When it fills</th>
+                    <th>Price control</th>
+                    <th>Best for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Market Order</td>
+                    <td>Immediately</td>
+                    <td>None — fills at current price</td>
+                    <td>Fast entry/exit</td>
+                  </tr>
+                  <tr>
+                    <td>Limit Order</td>
+                    <td>Only at your set price</td>
+                    <td>Full control</td>
+                    <td>Planned entry</td>
+                  </tr>
+                  <tr>
+                    <td>Stop Loss</td>
+                    <td>When price hits trigger</td>
+                    <td>Protects downside</td>
+                    <td>Risk management</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 Beginner tip</div>
+              <p>
+                Start with <b>limit orders</b> for buying — you pick your price
+                and wait. Always set a <b>stop loss</b> after every buy. Avoid
+                market orders in <b>low-volume stocks</b> — the price can slip
+                unexpectedly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bid & Ask Price -->
+      <div class="section" id="bid-ask">
+        <div class="section-card">
+          <span class="section-num section-num--sub">6.2</span>
+          <span class="section-tag">Pricing</span>
+          <h2>Bid &amp; Ask Price</h2>
+          <div class="content">
+            <p class="lead">
+              Every stock has <b>two prices at the same time</b> — a Bid price
+              and an Ask price. Understanding these two numbers helps you buy
+              and sell smarter.
+            </p>
+
+            <h3>What they mean</h3>
+            <ul>
+              <li>
+                <b>Bid Price</b> — the highest price a <b>buyer</b> is willing
+                to pay right now
+              </li>
+              <li>
+                <b>Ask Price</b> (also called Offer Price) — the lowest price a
+                <b>seller</b> is willing to accept right now
+              </li>
+              <li>The difference between them is called the <b>Spread</b></li>
+              <li>
+                A trade happens when a buyer agrees to the ask, or a seller
+                agrees to the bid
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📊 NIFTY ETF example</div>
+              <p>
+                A NIFTY BeES ETF might show:
+                <b>Bid ₹240.50 | Ask ₹240.60</b> (example). The spread is
+                <b>₹0.10</b>. If you place a market buy, you'll pay
+                <b>₹240.60</b> (the ask). If you place a market sell, you'll get
+                <b>₹240.50</b> (the bid). That ₹0.10 is the hidden cost of a
+                fast trade.
+              </p>
+            </div>
+
+            <!-- VISUAL: Bid/Ask spread diagram -->
+            <div style="margin:1.25rem 0 1.5rem;padding:1.25rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1rem;">📊 Bid vs Ask — visualised</div>
+              <svg viewBox="0 0 500 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- BID bar -->
+                <rect x="30" y="18" width="180" height="26" rx="5" fill="#021779" opacity="0.85"/>
+                <text x="120" y="36" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">BID  ₹240.50</text>
+                <text x="30" y="58" font-size="8" fill="var(--text-muted)">Highest price a buyer will pay</text>
+                <!-- SPREAD bracket -->
+                <line x1="210" y1="12" x2="210" y2="52" stroke="var(--border)" stroke-width="1"/>
+                <line x1="260" y1="12" x2="260" y2="52" stroke="var(--border)" stroke-width="1"/>
+                <line x1="210" y1="12" x2="260" y2="12" stroke="var(--border)" stroke-width="1"/>
+                <line x1="210" y1="52" x2="260" y2="52" stroke="var(--border)" stroke-width="1"/>
+                <text x="235" y="28" text-anchor="middle" font-size="8" fill="var(--text-muted)">SPREAD</text>
+                <text x="235" y="40" text-anchor="middle" font-size="9" font-weight="700" fill="var(--primary)">₹0.10</text>
+                <!-- ASK bar -->
+                <rect x="262" y="18" width="180" height="26" rx="5" fill="#10b981" opacity="0.8"/>
+                <text x="352" y="36" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">ASK  ₹240.60</text>
+                <text x="262" y="58" font-size="8" fill="var(--text-muted)">Lowest price a seller will accept</text>
+                <!-- Labels -->
+                <text x="30" y="78" font-size="8" fill="var(--text-muted)">← You SELL at Bid</text>
+                <text x="262" y="78" font-size="8" fill="var(--text-muted)">You BUY at Ask →</text>
+                <text x="190" y="78" text-anchor="middle" font-size="7.5" fill="var(--text-muted)" font-style="italic">hidden cost</text>
+              </svg>
+            </div>
+
+            <h3>Why the spread matters</h3>
+            <ul>
+              <li>
+                A <b>tight spread</b> (small gap) = easy to trade, lower cost.
+                Common in NIFTY 50 stocks like TCS, Reliance
+              </li>
+              <li>
+                A <b>wide spread</b> (large gap) = harder to trade, higher
+                hidden cost. Common in small-cap or illiquid stocks
+              </li>
+              <li>
+                When you buy at Ask and immediately sell at Bid, you lose the
+                spread — that's why
+                <b>frequent intraday traders watch spreads closely</b>
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">💡 Simple rule</div>
+              <p>
+                Stick to <b>NIFTY 50 stocks</b> as a beginner — they have very
+                tight spreads (often just 1 paisa to 50 paise). Avoid obscure
+                small-cap stocks where the spread can be ₹5 to ₹20 wide.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Volume -->
+      <div class="section" id="volume">
+        <div class="section-card">
+          <span class="section-num section-num--sub">6.3</span>
+          <span class="section-tag">Activity</span>
+          <h2>Volume</h2>
+          <div class="content">
+            <p class="lead">
+              <b>Volume</b> is simply the
+              <b>total number of shares traded</b> in a stock during a given
+              time period (a day, an hour, or even a minute). It tells you
+              <b>how active</b> a stock is.
+            </p>
+
+            <div class="example-box">
+              <div class="ex-label">📦 Real example</div>
+              <p>
+                On a normal day, <b>Reliance Industries</b> might trade
+                <b>80 lakh shares</b>. On a day when Reliance announces big
+                news, volume might spike to <b>2 crore shares</b>. That spike
+                tells you: <b>something important is happening</b> — big players
+                are reacting.
+              </p>
+            </div>
+
+            <h3>What high volume means</h3>
+            <ul>
+              <li>
+                <span class="kw-green">High volume + price rising</span> →
+                strong buying interest — the move is likely genuine and
+                sustainable
+              </li>
+              <li>
+                <span class="kw">High volume + price falling</span> → heavy
+                selling pressure — the fall may continue further
+              </li>
+              <li>
+                <b>Low volume + price rising</b> → weak, unconvincing move —
+                often reverses quickly. Be cautious
+              </li>
+            </ul>
+
+            <h3>Volume and NIFTY</h3>
+            <ul>
+              <li>
+                When NIFTY rises 200 points on <b>high volume</b>, it signals
+                broad market confidence
+              </li>
+              <li>
+                When NIFTY rises 200 points on <b>low volume</b>, it may just be
+                light buying — not a strong trend
+              </li>
+              <li>
+                Traders always check
+                <b>"is volume confirming the move?"</b> before entering a trade
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📈 NIFTY volume example</div>
+              <p>
+                Say NIFTY jumps from around <b>24,000 to 24,400</b> (up ~400
+                points, as an example). Check NSE data — if total market volume
+                is <b>2× the average</b>, this is a strong, trusted rally. If
+                volume is <b>below average</b>, experienced traders call it a
+                <b>"low conviction move"</b> and stay cautious.
+              </p>
+            </div>
+
+            <h3>Where to check volume</h3>
+            <ul>
+              <li>
+                On <b>any stock chart</b> — volume bars appear at the bottom of
+                every chart
+              </li>
+              <li>Tall bars = high volume. Short bars = low volume</li>
+              <li>
+                Apps like <b>Zerodha Kite, TradingView, NSE website</b> all show
+                volume clearly
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">💡 Beginner rule of thumb</div>
+              <p>
+                Never buy a stock that is rising on
+                <b>unusually low volume</b> — it often reverses. Always prefer
+                stocks with <b>consistent, healthy daily volume</b> (at least a
+                few lakh shares per day).
+              </p>
+            </div>
+
+            <!-- VISUAL: Volume bars -->
+            <div style="margin:1.25rem 0 0.5rem;padding:1.25rem 1rem 1rem;background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:0.85rem;">📊 Volume tells the story — NIFTY example week</div>
+              <svg viewBox="0 0 500 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Baseline -->
+                <line x1="40" y1="80" x2="480" y2="80" stroke="var(--border)" stroke-width="1"/>
+                <!-- Average line -->
+                <line x1="40" y1="45" x2="480" y2="45" stroke="var(--accent)" stroke-width="1" stroke-dasharray="5 3" opacity="0.6"/>
+                <text x="482" y="48" font-size="7.5" fill="var(--accent)" opacity="0.8">avg</text>
+                <!-- Mon - normal -->
+                <rect x="60" y="48" width="48" height="32" rx="3" fill="var(--primary)" opacity="0.5"/>
+                <text x="84" y="92" text-anchor="middle" font-size="8" fill="var(--text-muted)">Mon</text>
+                <text x="84" y="44" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">80L</text>
+                <!-- Tue - low -->
+                <rect x="140" y="60" width="48" height="20" rx="3" fill="var(--primary)" opacity="0.35"/>
+                <text x="164" y="92" text-anchor="middle" font-size="8" fill="var(--text-muted)">Tue</text>
+                <text x="164" y="57" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">45L</text>
+                <text x="164" y="105" text-anchor="middle" font-size="7" fill="#ef4444">low</text>
+                <!-- Wed - normal -->
+                <rect x="220" y="46" width="48" height="34" rx="3" fill="var(--primary)" opacity="0.5"/>
+                <text x="244" y="92" text-anchor="middle" font-size="8" fill="var(--text-muted)">Wed</text>
+                <text x="244" y="43" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">85L</text>
+                <!-- Thu - spike -->
+                <rect x="300" y="18" width="48" height="62" rx="3" fill="#10b981" opacity="0.75"/>
+                <text x="324" y="92" text-anchor="middle" font-size="8" fill="var(--text-muted)">Thu</text>
+                <text x="324" y="14" text-anchor="middle" font-size="7.5" fill="#10b981" font-weight="700">2Cr 🔥</text>
+                <text x="324" y="105" text-anchor="middle" font-size="7" fill="#10b981" font-weight="600">big news!</text>
+                <!-- Fri - normal -->
+                <rect x="380" y="50" width="48" height="30" rx="3" fill="var(--primary)" opacity="0.45"/>
+                <text x="404" y="92" text-anchor="middle" font-size="8" fill="var(--text-muted)">Fri</text>
+                <text x="404" y="46" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">75L</text>
+                <!-- Y axis label -->
+                <text x="36" y="48" text-anchor="end" font-size="7.5" fill="var(--text-muted)" opacity="0.7">shares</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2 -->
+      <p class="chapter-label">Part 2 — Technical Analysis</p>
+
+      <div class="section" id="charts">
+        <div class="section-card">
+          <span class="section-num">7.1</span>
+          <span class="section-tag">Charting</span>
+          <h2>Charts Basics</h2>
+          <div class="content">
+            <p class="lead">
+              A chart is simply a <b>picture of price over time</b>. Instead of
+              looking at a boring table of numbers, a chart lets you
+              <b>see</b> where a stock or index has been — and helps you guess
+              where it might go.
+            </p>
+
+            <h3>What is a chart?</h3>
+            <ul>
+              <li>
+                The <b>X-axis (horizontal)</b> shows <b>time</b> — minutes,
+                hours, days, months
+              </li>
+              <li>
+                The <b>Y-axis (vertical)</b> shows <b>price</b> — in rupees
+              </li>
+              <li>
+                Every point or bar on the chart = the price at that moment in
+                time
+              </li>
+              <li>
+                Charts are the main tool used in <b>Technical Analysis</b> —
+                reading price patterns to make trading decisions
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📺 Simple analogy</div>
+              <p>
+                Think of a chart like a <b>temperature graph</b> on a weather
+                app. The line going up means it got hotter. Going down means
+                cooler. A stock chart is the same idea — line going up means
+                price went up, going down means it fell.
+              </p>
+            </div>
+
+            <h3>Type 1 — Line Chart</h3>
+            <ul>
+              <li>
+                The simplest chart — just a
+                <b>single line connecting closing prices</b> each day
+              </li>
+              <li>
+                Easy to read at a glance — great for seeing the
+                <b>overall trend</b>
+              </li>
+              <li>
+                Does not show how much the price moved <em>within</em> a day —
+                only where it closed
+              </li>
+              <li>
+                Best for: <b>long-term investors</b> who want to see the big
+                picture
+              </li>
+            </ul>
+
+            <!-- SVG Line Chart -->
+            <div
+              style="
+                background: color-mix(in srgb, var(--primary) 5%, transparent);
+                border: 1px solid
+                  color-mix(in srgb, var(--primary) 18%, transparent);
+                border-radius: 10px;
+                padding: 1.25rem 1.25rem 0.75rem;
+                margin-bottom: 1.25rem;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.16em;
+                  text-transform: uppercase;
+                  font-weight: 700;
+                  color: var(--primary);
+                  margin-bottom: 0.75rem;
+                "
+              >
+                📈 NIFTY 50 — Line Chart (5 days)
+              </div>
+              <svg
+                viewBox="0 0 480 140"
+                xmlns="http://www.w3.org/2000/svg"
+                style="width: 100%; height: auto; display: block"
+              >
+                <defs>
+                  <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="0%"
+                      stop-color="#2563EB"
+                      stop-opacity="0.18"
+                    />
+                    <stop offset="100%" stop-color="#2563EB" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <!-- grid lines -->
+                <line
+                  x1="50"
+                  y1="20"
+                  x2="460"
+                  y2="20"
+                  stroke="currentColor"
+                  stroke-opacity="0.07"
+                  stroke-width="1"
+                />
+                <line
+                  x1="50"
+                  y1="55"
+                  x2="460"
+                  y2="55"
+                  stroke="currentColor"
+                  stroke-opacity="0.07"
+                  stroke-width="1"
+                />
+                <line
+                  x1="50"
+                  y1="90"
+                  x2="460"
+                  y2="90"
+                  stroke="currentColor"
+                  stroke-opacity="0.07"
+                  stroke-width="1"
+                />
+                <line
+                  x1="50"
+                  y1="115"
+                  x2="460"
+                  y2="115"
+                  stroke="currentColor"
+                  stroke-opacity="0.07"
+                  stroke-width="1"
+                />
+                <!-- y labels -->
+                <text
+                  x="44"
+                  y="24"
+                  text-anchor="end"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.45"
+                >
+                  24,500
+                </text>
+                <text
+                  x="44"
+                  y="59"
+                  text-anchor="end"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.45"
+                >
+                  24,200
+                </text>
+                <text
+                  x="44"
+                  y="94"
+                  text-anchor="end"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.45"
+                >
+                  23,900
+                </text>
+                <text
+                  x="44"
+                  y="119"
+                  text-anchor="end"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.45"
+                >
+                  23,700
+                </text>
+                <!-- fill area -->
+                <polygon
+                  points="80,95 180,108 260,75 360,45 440,28 440,115 80,115"
+                  fill="url(#lineGrad)"
+                />
+                <!-- line -->
+                <polyline
+                  points="80,95 180,108 260,75 360,45 440,28"
+                  fill="none"
+                  stroke="#2563EB"
+                  stroke-width="2.5"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                />
+                <!-- dots -->
+                <circle cx="80" cy="95" r="4" fill="#2563EB" />
+                <circle cx="180" cy="108" r="4" fill="#2563EB" />
+                <circle cx="260" cy="75" r="4" fill="#2563EB" />
+                <circle cx="360" cy="45" r="4" fill="#2563EB" />
+                <circle cx="440" cy="28" r="4" fill="#2563EB" />
+                <!-- x labels -->
+                <text
+                  x="80"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  Mon
+                </text>
+                <text
+                  x="180"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  Tue
+                </text>
+                <text
+                  x="260"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  Wed
+                </text>
+                <text
+                  x="360"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  Thu
+                </text>
+                <text
+                  x="440"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="9"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  Fri
+                </text>
+              </svg>
+              <p
+                style="
+                  font-size: 0.78rem;
+                  color: var(--text-muted);
+                  margin-top: 0.35rem;
+                "
+              >
+                NIFTY dipped on Tuesday, then recovered strongly — clearly
+                visible on a line chart.
+              </p>
+            </div>
+
+            <div class="example-box">
+              <div class="ex-label">📉 NIFTY line chart example</div>
+              <p>
+                Open NIFTY on TradingView and switch to a
+                <b>Weekly line chart</b>. You'll instantly see that NIFTY went
+                from ~<b>17,000 in early 2023</b> to ~<b>24,000 by 2024</b>.
+                That upward sloping line = a healthy <b>bull market</b>. No
+                candles needed to see that.
+              </p>
+            </div>
+
+            <h3>Type 2 — Candlestick Chart</h3>
+            <ul>
+              <li>The most popular chart used by <b>traders worldwide</b></li>
+              <li>
+                Each "candle" shows <b>4 prices</b> for that time period: Open,
+                High, Low, and Close (OHLC)
+              </li>
+              <li>
+                <b>Green candle</b> = price went <b>up</b> (Close &gt; Open).
+                <b>Red candle</b> = price went <b>down</b> (Close &lt; Open)
+              </li>
+              <li>
+                The thin lines above/below the body are called
+                <b>wicks (or shadows)</b> — they show the high and low
+              </li>
+              <li>
+                Best for: <b>traders</b> who need to see price movement in
+                detail
+              </li>
+            </ul>
+
+            <!-- SVG Candlestick diagram -->
+            <div
+              style="
+                background: color-mix(in srgb, var(--accent) 6%, transparent);
+                border: 1px solid
+                  color-mix(in srgb, var(--accent) 20%, transparent);
+                border-radius: 10px;
+                padding: 1.25rem;
+                margin-bottom: 1.25rem;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.6rem;
+                  letter-spacing: 0.16em;
+                  text-transform: uppercase;
+                  font-weight: 700;
+                  color: var(--accent);
+                  margin-bottom: 1rem;
+                "
+              >
+                🕯️ Anatomy of a single candle
+              </div>
+              <svg
+                viewBox="0 0 480 170"
+                xmlns="http://www.w3.org/2000/svg"
+                style="width: 100%; height: auto; display: block"
+              >
+                <!-- GREEN CANDLE (left) -->
+                <text
+                  x="90"
+                  y="14"
+                  text-anchor="middle"
+                  font-size="10"
+                  font-weight="700"
+                  fill="#10B981"
+                >
+                  GREEN CANDLE
+                </text>
+                <text
+                  x="90"
+                  y="26"
+                  text-anchor="middle"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  (Price went UP)
+                </text>
+                <!-- wick top -->
+                <line
+                  x1="90"
+                  y1="35"
+                  x2="90"
+                  y2="52"
+                  stroke="#10B981"
+                  stroke-width="2"
+                />
+                <!-- body -->
+                <rect
+                  x="72"
+                  y="52"
+                  width="36"
+                  height="55"
+                  rx="3"
+                  fill="#10B981"
+                  opacity="0.9"
+                />
+                <!-- wick bottom -->
+                <line
+                  x1="90"
+                  y1="107"
+                  x2="90"
+                  y2="125"
+                  stroke="#10B981"
+                  stroke-width="2"
+                />
+                <!-- labels -->
+                <text
+                  x="118"
+                  y="39"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.6"
+                >
+                  ← High (wick top)
+                </text>
+                <text
+                  x="118"
+                  y="57"
+                  font-size="8.5"
+                  fill="#10B981"
+                  font-weight="600"
+                >
+                  ← Close (top of body)
+                </text>
+                <text
+                  x="118"
+                  y="105"
+                  font-size="8.5"
+                  fill="#10B981"
+                  font-weight="600"
+                >
+                  ← Open (bottom of body)
+                </text>
+                <text
+                  x="118"
+                  y="124"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.6"
+                >
+                  ← Low (wick bottom)
+                </text>
+
+                <!-- RED CANDLE (right) -->
+                <text
+                  x="340"
+                  y="14"
+                  text-anchor="middle"
+                  font-size="10"
+                  font-weight="700"
+                  fill="#EF4444"
+                >
+                  RED CANDLE
+                </text>
+                <text
+                  x="340"
+                  y="26"
+                  text-anchor="middle"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.5"
+                >
+                  (Price went DOWN)
+                </text>
+                <!-- wick top -->
+                <line
+                  x1="340"
+                  y1="35"
+                  x2="340"
+                  y2="52"
+                  stroke="#EF4444"
+                  stroke-width="2"
+                />
+                <!-- body -->
+                <rect
+                  x="322"
+                  y="52"
+                  width="36"
+                  height="55"
+                  rx="3"
+                  fill="#EF4444"
+                  opacity="0.9"
+                />
+                <!-- wick bottom -->
+                <line
+                  x1="340"
+                  y1="107"
+                  x2="340"
+                  y2="125"
+                  stroke="#EF4444"
+                  stroke-width="2"
+                />
+                <!-- labels -->
+                <text
+                  x="368"
+                  y="39"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.6"
+                >
+                  ← High
+                </text>
+                <text
+                  x="368"
+                  y="57"
+                  font-size="8.5"
+                  fill="#EF4444"
+                  font-weight="600"
+                >
+                  ← Open (top of body)
+                </text>
+                <text
+                  x="368"
+                  y="105"
+                  font-size="8.5"
+                  fill="#EF4444"
+                  font-weight="600"
+                >
+                  ← Close (bottom of body)
+                </text>
+                <text
+                  x="368"
+                  y="124"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.6"
+                >
+                  ← Low
+                </text>
+
+                <!-- divider -->
+                <line
+                  x1="240"
+                  y1="10"
+                  x2="240"
+                  y2="140"
+                  stroke="currentColor"
+                  stroke-opacity="0.1"
+                  stroke-width="1"
+                  stroke-dasharray="4 3"
+                />
+
+                <!-- bottom note -->
+                <text
+                  x="240"
+                  y="158"
+                  text-anchor="middle"
+                  font-size="8.5"
+                  fill="currentColor"
+                  opacity="0.45"
+                >
+                  Green = Closed higher than it opened · Red = Closed lower than
+                  it opened
+                </text>
+              </svg>
+            </div>
+
+            <div class="example-box">
+              <div class="ex-label">🕯️ NIFTY candlestick example</div>
+              <p>
+                NIFTY on a Monday: Opens at <b>24,100</b>, goes as high as
+                <b>24,350</b>, dips to <b>24,050</b>, closes at <b>24,280</b>.
+                Result: a <b>green candle</b>. Body goes from 24,100 (open) to
+                24,280 (close). Top wick reaches 24,350. Bottom wick touches
+                24,050. One candle — four pieces of information.
+              </p>
+            </div>
+
+            <h3>Line vs Candlestick — which to use?</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Line Chart</th>
+                    <th>Candlestick Chart</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Shows</td>
+                    <td>Only closing price</td>
+                    <td>Open, High, Low, Close</td>
+                  </tr>
+                  <tr>
+                    <td>Best for</td>
+                    <td>Long-term trend view</td>
+                    <td>Short-term trading</td>
+                  </tr>
+                  <tr>
+                    <td>Complexity</td>
+                    <td>Very simple</td>
+                    <td>Moderate</td>
+                  </tr>
+                  <tr>
+                    <td>Used by</td>
+                    <td>Investors, beginners</td>
+                    <td>Traders, analysts</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 Beginner recommendation</div>
+              <p>
+                Start by looking at a <b>daily candlestick chart</b> of NIFTY 50
+                on TradingView. Each candle = one full trading day. Green days =
+                NIFTY went up. Red days = NIFTY fell. Once you can read this
+                comfortably, you're ready to learn patterns.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeframes -->
+      <div class="section" id="timeframes">
+        <div class="section-card">
+          <span class="section-num section-num--sub">7.2</span>
+          <span class="section-tag">Time</span>
+          <h2>Timeframes</h2>
+          <div class="content">
+            <p class="lead">
+              A <b>timeframe</b> controls how much time each candle (or data
+              point) on a chart represents. The same stock looks completely
+              different on a 5-minute chart vs a weekly chart — and both are
+              showing you the truth, just at different zoom levels.
+            </p>
+
+            <h3>Common timeframes explained</h3>
+            <ul>
+              <li>
+                <b>1 min / 5 min / 15 min</b> — each candle = that many minutes
+                of trading. Used by <b>intraday traders</b> who open and close
+                trades the same day
+              </li>
+              <li>
+                <b>1 Hour (1H)</b> — each candle = 1 hour of trading. Good for
+                <b>swing traders</b> holding positions for a few days
+              </li>
+              <li>
+                <b>Daily (1D)</b> — each candle = one full trading day. The most
+                widely used timeframe — good for <b>everyone</b>
+              </li>
+              <li>
+                <b>Weekly (1W)</b> — each candle = one full week. Used by
+                <b>long-term investors</b> to see the big picture
+              </li>
+              <li>
+                <b>Monthly (1M)</b> — each candle = one month. Used to study
+                <b>multi-year trends</b>
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🔍 NIFTY zoom-in example</div>
+              <p>
+                On a <b>5-minute chart</b>, NIFTY might look volatile — bouncing
+                up and down every few candles. But zoom out to the
+                <b>Daily chart</b> and you see NIFTY is clearly in an uptrend.
+                The 5-min noise disappears.
+                <b>Always check the daily chart</b> before making any decision.
+              </p>
+            </div>
+
+            <h3>Which timeframe should you use?</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>You are a…</th>
+                    <th>Recommended Timeframe</th>
+                    <th>Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Complete beginner</td>
+                    <td>Daily (1D)</td>
+                    <td>Clear signals, less noise, easy to follow</td>
+                  </tr>
+                  <tr>
+                    <td>Intraday trader</td>
+                    <td>5 min + 15 min</td>
+                    <td>Fine-grained price action for same-day trades</td>
+                  </tr>
+                  <tr>
+                    <td>Swing trader</td>
+                    <td>1H + Daily</td>
+                    <td>Spots multi-day setups</td>
+                  </tr>
+                  <tr>
+                    <td>Long-term investor</td>
+                    <td>Weekly + Monthly</td>
+                    <td>Ignores short-term noise, sees real trend</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>The golden rule — higher timeframe wins</h3>
+            <ul>
+              <li>
+                If the <b>daily chart</b> says NIFTY is in a downtrend, don't
+                fight it just because the 5-min chart looks bullish
+              </li>
+              <li>
+                Always check the <b>bigger timeframe first</b>, then zoom in for
+                your entry
+              </li>
+              <li>
+                This is called <b>Top-Down Analysis</b> — used by professional
+                traders every day
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🗓️ NIFTY top-down example</div>
+              <p>
+                <b>Weekly chart:</b> NIFTY in a clear uptrend — higher highs,
+                higher lows over months. <b>Daily chart:</b> NIFTY pulled back
+                2% this week. <b>15-min chart:</b> Now bouncing off support. A
+                swing trader sees this as a <b>buying opportunity</b> — the
+                short-term dip within a larger uptrend.
+              </p>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 Where to practice</div>
+              <p>
+                Go to <b>TradingView.com</b> → search "NIFTY 50" → switch
+                between timeframes using the buttons at the top (1D, 1W, 1H
+                etc.). Try switching from Daily to 5-min on any big news day and
+                see how the same move looks completely different at each zoom
+                level.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="candlesticks">
+        <div class="section-card">
+          <span class="section-num">08</span>
+          <span class="section-tag">Price Action</span>
+          <h2>Candlestick Patterns</h2>
+          <div class="content">
+            <p class="lead">
+              A <b>candlestick pattern</b> is a shape formed by one or more
+              candles that tells you what buyers and sellers are doing. Certain
+              shapes repeat again and again — and they often signal that the
+              price is about to reverse or continue.
+            </p>
+
+            <h3>Candlestick Basics — a quick recap</h3>
+            <ul>
+              <li>
+                <b>Body</b> — the thick part. Shows the distance between open
+                and close
+              </li>
+              <li>
+                <b>Wick (shadow)</b> — the thin lines above and below the body.
+                Show how far price moved before coming back
+              </li>
+              <li>
+                <b>Green candle</b> — price closed higher than it opened (buyers
+                won)
+              </li>
+              <li>
+                <b>Red candle</b> — price closed lower than it opened (sellers
+                won)
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">🕯️ Quick example</div>
+              <p>
+                Reliance opens at ₹2,800, goes up to ₹2,850, falls to ₹2,780,
+                then closes at ₹2,820. The candle body goes from ₹2,800 to
+                ₹2,820 (green). Top wick = ₹2,850. Bottom wick = ₹2,780. Buyers
+                were stronger overall.
+              </p>
+            </div>
+
+            <h3>Pattern 1 — Doji</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              A <b>Doji</b> has almost no body — open and close are nearly the
+              same. It means buyers and sellers are <b>equal in strength</b>.
+              Nobody won. This is a sign of <b>indecision</b>. After a big move
+              up or down, a Doji often warns that the trend might pause or
+              reverse.
+            </p>
+            <div class="example-box">
+              <div class="ex-label">📌 Doji example</div>
+              <p>
+                NIFTY has been going up for 5 days. On day 6, it opens at
+                24,400, goes up to 24,430, dips to 24,370, then closes at
+                24,402. Tiny body, long wicks on both sides. That's a Doji —
+                bulls are running out of energy. Watch for a pullback.
+              </p>
+            </div>
+
+            <h3>Pattern 2 — Hammer</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              A <b>Hammer</b> has a small body at the top and a long bottom wick
+              (at least 2× the body). It appears after a downtrend. It means:
+              price fell sharply during the day, but buyers pushed it back up
+              before the close. This is a <b>bullish reversal signal</b>.
+            </p>
+            <ul>
+              <li><b>Small body</b> near the top of the candle</li>
+              <li><b>Long lower wick</b> — the "handle" of the hammer</li>
+              <li><b>Little or no upper wick</b></li>
+              <li>
+                Most reliable when it appears <b>after a clear downtrend</b>
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">🔨 Hammer example</div>
+              <p>
+                TCS has fallen for 3 days. On day 4, it opens at ₹3,600, drops
+                to ₹3,520 (long wick), then closes at ₹3,595. Small body, long
+                bottom wick — a Hammer. Buyers stepped in at lower prices. A
+                bounce upward often follows.
+              </p>
+            </div>
+
+            <h3>Pattern 3 — Engulfing</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              An <b>Engulfing pattern</b> is two candles. The second candle's
+              body completely covers ("engulfs") the first candle's body. It
+              shows a <b>sudden shift in power</b>.
+            </p>
+            <ul>
+              <li>
+                <b>Bullish Engulfing</b> — a small red candle followed by a
+                large green candle that covers it. Appears after a downtrend.
+                Buyers took over.
+              </li>
+              <li>
+                <b>Bearish Engulfing</b> — a small green candle followed by a
+                large red candle that covers it. Appears after an uptrend.
+                Sellers took over.
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">📊 Engulfing example</div>
+              <p>
+                HDFC Bank falls for 4 days. Day 5: small red candle, body from
+                ₹1,640 to ₹1,630. Day 6: opens at ₹1,625, closes at ₹1,658 — a
+                large green candle that fully covers day 5's body.
+                <b>Bullish engulfing</b>. Strong signal that buyers are back in
+                control.
+              </p>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 How to use patterns</div>
+              <p>
+                Never act on a single pattern alone. Always check: <b>(1)</b> Is
+                this pattern appearing at a key support or resistance level?
+                <b>(2)</b> Is the overall trend in your favour? <b>(3)</b> Is
+                volume higher than usual on the pattern candle? More
+                confirmations = stronger signal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="support-resistance">
+        <div class="section-card">
+          <span class="section-num">09</span>
+          <span class="section-tag">Key Levels</span>
+          <h2>Support &amp; Resistance</h2>
+          <div class="content">
+            <p class="lead">
+              <b>Support</b> and <b>Resistance</b> are price levels where the
+              stock tends to stop and reverse. They are the most important
+              concept in technical analysis — almost every trading decision
+              involves them.
+            </p>
+
+            <!-- VISUAL: Support & Resistance price chart -->
+            <div style="margin:0 0 1.5rem;padding:1.25rem 1rem 1rem;background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:0.85rem;">📈 NIFTY — support &amp; resistance in action</div>
+              <svg viewBox="0 0 520 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Resistance line -->
+                <line x1="30" y1="28" x2="490" y2="28" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.7"/>
+                <text x="492" y="32" font-size="8.5" fill="#ef4444" font-weight="600">25,000 RESISTANCE</text>
+                <!-- Support line -->
+                <line x1="30" y1="108" x2="490" y2="108" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.7"/>
+                <text x="492" y="112" font-size="8.5" fill="#10b981" font-weight="600">23,800 SUPPORT</text>
+                <!-- Price path -->
+                <polyline points="30,90 70,60 95,104 130,70 155,108 185,72 210,108 250,58 270,28 300,50 330,108 365,78 395,108 430,68 460,30 490,55"
+                  fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.8"/>
+                <!-- Bounce markers at support -->
+                <circle cx="155" cy="108" r="5" fill="#10b981" opacity="0.9"/>
+                <circle cx="210" cy="108" r="5" fill="#10b981" opacity="0.9"/>
+                <circle cx="330" cy="108" r="5" fill="#10b981" opacity="0.9"/>
+                <circle cx="395" cy="108" r="5" fill="#10b981" opacity="0.9"/>
+                <!-- Rejection markers at resistance -->
+                <circle cx="270" cy="28" r="5" fill="#ef4444" opacity="0.9"/>
+                <circle cx="460" cy="30" r="5" fill="#ef4444" opacity="0.9"/>
+                <!-- Labels -->
+                <text x="165" y="124" text-anchor="middle" font-size="7.5" fill="#10b981">bounce ↑</text>
+                <text x="220" y="124" text-anchor="middle" font-size="7.5" fill="#10b981">bounce ↑</text>
+                <text x="340" y="124" text-anchor="middle" font-size="7.5" fill="#10b981">bounce ↑</text>
+                <text x="405" y="124" text-anchor="middle" font-size="7.5" fill="#10b981">bounce ↑</text>
+                <text x="270" y="20" text-anchor="middle" font-size="7.5" fill="#ef4444">rejected ↓</text>
+                <text x="460" y="20" text-anchor="middle" font-size="7.5" fill="#ef4444">rejected ↓</text>
+              </svg>
+            </div>
+
+            <h3>What is Support?</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              <b>Support</b> is a price level where a falling stock tends to
+              stop and bounce back up. Think of it as a <b>floor</b>. At this
+              price, buyers are interested and ready to buy — so selling
+              pressure slows down.
+            </p>
+            <div class="example-box">
+              <div class="ex-label">📌 Support example</div>
+              <p>
+                NIFTY falls to 23,800 in January, bounces. Falls again in March
+                to 23,800, bounces again. Falls in May to 23,800, bounces again.
+                The level 23,800 is <b>strong support</b> — every time price
+                reaches there, buyers come in. As a trader, you watch this level
+                closely.
+              </p>
+            </div>
+
+            <h3>What is Resistance?</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              <b>Resistance</b> is a price level where a rising stock tends to
+              stop and fall back down. Think of it as a <b>ceiling</b>. At this
+              price, sellers are ready to sell — so buying pressure weakens.
+            </p>
+            <div class="example-box">
+              <div class="ex-label">📌 Resistance example</div>
+              <p>
+                Infosys rises to ₹1,900, then falls. Rises again to ₹1,900, then
+                falls. A third time — same story. The level ₹1,900 is
+                <b>strong resistance</b>. Sellers keep showing up there. Until
+                this level is broken, the stock struggles to go higher.
+              </p>
+            </div>
+
+            <h3>Support and Resistance flip roles</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              This is one of the most powerful ideas in technical analysis. When
+              price <b>breaks through</b> a resistance level, that old
+              resistance often <b>becomes new support</b> — and vice versa.
+            </p>
+            <ul>
+              <li>
+                <b>Resistance broken →</b> becomes support. Price comes back to
+                test it from above and bounces up
+              </li>
+              <li>
+                <b>Support broken →</b> becomes resistance. Price comes back to
+                test it from below and falls again
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">🔄 Flip example</div>
+              <p>
+                NIFTY was stuck below 25,000 for months (resistance). It finally
+                breaks above 25,000 with strong volume. Two weeks later, NIFTY
+                dips back to 25,000 and <b>bounces up</b>. The old resistance is
+                now support. Many traders use this bounce as a buying
+                opportunity.
+              </p>
+            </div>
+
+            <h3>How to identify key levels</h3>
+            <ul>
+              <li>
+                Look for price levels where the stock has
+                <b>turned around multiple times</b> in the past
+              </li>
+              <li>
+                <b>Round numbers</b> (₹1,000, ₹2,500, 24,000) often act as
+                psychological support/resistance
+              </li>
+              <li>
+                <b>Higher volume</b> at a level makes it stronger — more people
+                traded there
+              </li>
+              <li>
+                The more times a level has been tested, the
+                <b>more significant</b> it is
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <div class="info-label">💡 Practical tip</div>
+              <p>
+                Open any stock on TradingView on the Daily chart. Draw a
+                horizontal line at the price where you see
+                <b>multiple tops or bottoms</b>. That's your support or
+                resistance. Practice on NIFTY, Reliance, and TCS first — they
+                have the clearest levels because so many traders watch them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="trend">
+        <div class="section-card">
+          <span class="section-num">10</span>
+          <span class="section-tag">Direction</span>
+          <h2>Trend</h2>
+          <div class="content">
+            <p class="lead">
+              A <b>trend</b> is the general direction in which a stock or index
+              is moving over time. There are three types: up, down, and
+              sideways. The oldest rule in trading is:
+              <em>"The trend is your friend."</em> Trade with it, not against
+              it.
+            </p>
+
+            <h3>Uptrend</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              An <b>uptrend</b> is when price makes
+              <b>higher highs and higher lows</b> over time. Each peak is higher
+              than the last, and each dip is also higher than the last. Buyers
+              are in control.
+            </p>
+            <ul>
+              <li>Each rally goes <b>higher</b> than the previous rally</li>
+              <li>
+                Each pullback stays <b>above</b> the previous pullback low
+              </li>
+              <li>
+                Uptrends favour <b>buying on dips</b> (buying during small
+                pullbacks)
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">📈 Uptrend example</div>
+              <p>
+                NIFTY: peaks at 23,500 → dips to 23,000 → rises to 24,200 → dips
+                to 23,700 → rises to 25,000. Each high is higher than the last.
+                Each low is also higher. Classic uptrend. Traders who bought on
+                each dip made money.
+              </p>
+            </div>
+
+            <h3>Downtrend</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              A <b>downtrend</b> is the opposite —
+              <b>lower highs and lower lows</b>. Every rally fails to reach the
+              previous high, and every dip goes lower than the last. Sellers are
+              in control.
+            </p>
+            <ul>
+              <li>
+                Each rally reaches a <b>lower peak</b> than the one before
+              </li>
+              <li>Each dip falls <b>below</b> the previous dip</li>
+              <li>
+                In a downtrend, <b>avoid buying</b>. Wait for a confirmed
+                reversal before entering
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">📉 Downtrend example</div>
+              <p>
+                A mid-cap stock: peaks at ₹500 → dips to ₹460 → rises to ₹485 →
+                dips to ₹430 → rises to ₹455 → dips to ₹400. Every high is
+                lower. Every low is lower. Buyers who "bought the dip" kept
+                losing. Always check the trend before buying a falling stock.
+              </p>
+            </div>
+
+            <h3>Sideways (Range-bound)</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              A <b>sideways trend</b> (also called consolidation or a range) is
+              when price moves back and forth between a clear top (resistance)
+              and a clear bottom (support), going nowhere overall. Neither
+              buyers nor sellers are winning.
+            </p>
+            <ul>
+              <li>Price bounces between a <b>fixed ceiling and floor</b></li>
+              <li>
+                Range traders <b>buy near support</b> and
+                <b>sell near resistance</b>
+              </li>
+              <li>
+                Ranges often end in a <b>breakout</b> — a sharp move up or down
+                out of the range
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">↔️ Sideways example</div>
+              <p>
+                Wipro trades between ₹440 (support) and ₹465 (resistance) for 6
+                weeks. It bounces between these two levels repeatedly. Then one
+                day it closes at ₹472 on high volume — a <b>breakout</b>. The
+                sideways phase is over. Traders who spotted this entered early
+                in the new uptrend.
+              </p>
+            </div>
+
+            <!-- VISUAL: Three trend types -->
+            <div style="margin:0.5rem 0 1.5rem;padding:1.25rem 1rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:1rem;">📉📈 Three trend types — at a glance</div>
+              <svg viewBox="0 0 540 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Dividers -->
+                <line x1="180" y1="10" x2="180" y2="100" stroke="var(--border)" stroke-width="1"/>
+                <line x1="360" y1="10" x2="360" y2="100" stroke="var(--border)" stroke-width="1"/>
+
+                <!-- UPTREND panel -->
+                <text x="90" y="18" text-anchor="middle" font-size="9" font-weight="700" fill="#10b981">UPTREND</text>
+                <text x="90" y="28" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Higher highs · Higher lows</text>
+                <polyline points="15,85 40,70 65,75 90,55 115,60 140,38 165,42"
+                  fill="none" stroke="#10b981" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <!-- HH/HL markers -->
+                <circle cx="40" cy="70" r="3" fill="#10b981"/>
+                <circle cx="90" cy="55" r="3" fill="#10b981"/>
+                <circle cx="140" cy="38" r="3" fill="#10b981"/>
+                <text x="40" y="66" text-anchor="middle" font-size="6.5" fill="#10b981">HL</text>
+                <text x="90" y="51" text-anchor="middle" font-size="6.5" fill="#10b981">HH</text>
+                <text x="140" y="34" text-anchor="middle" font-size="6.5" fill="#10b981">HH</text>
+                <text x="90" y="100" text-anchor="middle" font-size="7.5" fill="#10b981" font-weight="600">Buy on dips ✓</text>
+
+                <!-- DOWNTREND panel -->
+                <text x="270" y="18" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444">DOWNTREND</text>
+                <text x="270" y="28" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Lower highs · Lower lows</text>
+                <polyline points="195,38 220,52 245,42 270,65 295,55 320,78 345,68"
+                  fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <circle cx="220" cy="52" r="3" fill="#ef4444"/>
+                <circle cx="270" cy="65" r="3" fill="#ef4444"/>
+                <circle cx="320" cy="78" r="3" fill="#ef4444"/>
+                <text x="220" y="60" text-anchor="middle" font-size="6.5" fill="#ef4444">LH</text>
+                <text x="270" y="73" text-anchor="middle" font-size="6.5" fill="#ef4444">LL</text>
+                <text x="320" y="86" text-anchor="middle" font-size="6.5" fill="#ef4444">LL</text>
+                <text x="270" y="100" text-anchor="middle" font-size="7.5" fill="#ef4444" font-weight="600">Stay out ✗</text>
+
+                <!-- SIDEWAYS panel -->
+                <text x="450" y="18" text-anchor="middle" font-size="9" font-weight="700" fill="var(--primary)">SIDEWAYS</text>
+                <text x="450" y="28" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">Bounces in a range</text>
+                <!-- Range lines -->
+                <line x1="375" y1="45" x2="525" y2="45" stroke="var(--primary)" stroke-width="1" stroke-dasharray="4 2" opacity="0.5"/>
+                <line x1="375" y1="80" x2="525" y2="80" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4 2" opacity="0.5"/>
+                <polyline points="375,78 395,44 415,76 435,46 455,78 475,45 495,77 515,46"
+                  fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.75"/>
+                <text x="527" y="48" font-size="7" fill="var(--primary)" opacity="0.7">R</text>
+                <text x="527" y="83" font-size="7" fill="var(--accent)" opacity="0.7">S</text>
+                <text x="450" y="100" text-anchor="middle" font-size="7.5" fill="var(--primary)" font-weight="600">Trade range / wait</text>
+              </svg>
+            </div>
+
+            <h3>How to identify a trend</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Trend Type</th>
+                    <th>What you see on the chart</th>
+                    <th>What to do</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Uptrend</td>
+                    <td>Higher highs + higher lows</td>
+                    <td>Look to buy on dips</td>
+                  </tr>
+                  <tr>
+                    <td>Downtrend</td>
+                    <td>Lower highs + lower lows</td>
+                    <td>Stay out or wait for reversal</td>
+                  </tr>
+                  <tr>
+                    <td>Sideways</td>
+                    <td>Price bouncing in a flat range</td>
+                    <td>Trade the range or wait for breakout</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 The most common beginner mistake</div>
+              <p>
+                Buying a stock just because it has fallen a lot — hoping it will
+                "bounce back." If it's in a downtrend (lower highs, lower lows),
+                there's no reason it must bounce. Always confirm the trend has
+                <b>actually reversed</b> before buying. A downtrend ends when
+                the stock finally makes a <b>higher high</b> for the first time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="indicators">
+        <div class="section-card">
+          <span class="section-num">11</span>
+          <span class="section-tag">Indicators</span>
+          <h2>Indicators — RSI, MACD &amp; Moving Averages</h2>
+          <div class="content">
+            <p class="lead">
+              <b>Indicators</b> are maths-based tools that are drawn on top of
+              (or below) a price chart. They help you answer three questions:
+              <em>Which direction is the trend?</em>
+              <em>Is the stock overbought or oversold?</em>
+              <em>Is momentum shifting?</em> You don't need all of them —
+              knowing three well is enough.
+            </p>
+
+            <h3>1 — Moving Average (MA)</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              A <b>Moving Average</b> smooths out price noise by showing the
+              <b>average closing price</b> over a set number of days. Instead of
+              seeing every zigzag, you see a clean line that shows the overall
+              direction.
+            </p>
+            <ul>
+              <li>
+                <b>20 MA</b> — average of the last 20 days. Shows short-term
+                direction
+              </li>
+              <li>
+                <b>50 MA</b> — average of the last 50 days. Shows medium-term
+                direction
+              </li>
+              <li>
+                <b>200 MA</b> — average of the last 200 days. Shows long-term
+                direction. The most watched level by big investors
+              </li>
+            </ul>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <b>How to read it:</b> If price is <b>above</b> the MA, the trend
+              is up. If price is <b>below</b> the MA, the trend is down. Simple
+              as that.
+            </p>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <b>Golden Cross &amp; Death Cross:</b> When the 50 MA crosses
+              <em>above</em> the 200 MA, it's called a <b>Golden Cross</b> — a
+              bullish signal. When it crosses <em>below</em>, it's a
+              <b>Death Cross</b> — a bearish signal. These are watched globally.
+            </p>
+            <div class="example-box">
+              <div class="ex-label">📈 MA example</div>
+              <p>
+                Say NIFTY is around 24,500 and its 200 MA is near 23,200
+                (example). Price is well above the 200 MA — the long-term trend
+                is up. A trader uses the <b>50 MA as support</b>: every time
+                NIFTY dips to the 50 MA and bounces, they buy.
+              </p>
+            </div>
+
+            <!-- VISUAL: Moving averages chart -->
+            <div style="margin:0.5rem 0 1.25rem;padding:1.25rem 1rem 1rem;background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:0.85rem;">📈 Moving averages on a price chart — NIFTY example</div>
+              <svg viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Grid lines -->
+                <line x1="30" y1="20" x2="500" y2="20" stroke="currentColor" stroke-opacity="0.06" stroke-width="1"/>
+                <line x1="30" y1="50" x2="500" y2="50" stroke="currentColor" stroke-opacity="0.06" stroke-width="1"/>
+                <line x1="30" y1="80" x2="500" y2="80" stroke="currentColor" stroke-opacity="0.06" stroke-width="1"/>
+                <!-- Y labels -->
+                <text x="26" y="23" text-anchor="end" font-size="7.5" fill="var(--text-muted)" opacity="0.7">25,000</text>
+                <text x="26" y="53" text-anchor="end" font-size="7.5" fill="var(--text-muted)" opacity="0.7">24,000</text>
+                <text x="26" y="83" text-anchor="end" font-size="7.5" fill="var(--text-muted)" opacity="0.7">23,000</text>
+                <!-- Price line (jagged) -->
+                <polyline points="30,85 60,72 80,78 105,60 125,55 150,48 170,55 195,40 220,32 245,28 270,35 290,22 315,30 340,25 365,18 390,28 415,22 440,15 470,20 500,17"
+                  fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.6"/>
+                <!-- 50 MA (medium blue) -->
+                <polyline points="30,88 80,80 130,68 180,56 230,44 280,36 330,28 380,24 430,20 500,18"
+                  fill="none" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                <!-- 200 MA (flat, dark) -->
+                <polyline points="30,95 100,92 200,88 300,82 400,75 500,68"
+                  fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.8"/>
+                <!-- Golden cross marker -->
+                <circle cx="230" cy="44" r="7" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                <text x="230" y="38" text-anchor="middle" font-size="7" fill="#f59e0b" font-weight="700">GC</text>
+                <!-- Legend -->
+                <rect x="310" y="88" width="10" height="3" rx="1" fill="var(--primary)" opacity="0.6"/>
+                <text x="324" y="93" font-size="7.5" fill="var(--text-muted)">Price</text>
+                <rect x="355" y="88" width="10" height="3" rx="1" fill="#3b82f6"/>
+                <text x="369" y="93" font-size="7.5" fill="#3b82f6">50 MA</text>
+                <rect x="400" y="88" width="10" height="3" rx="1" fill="#ef4444" opacity="0.8"/>
+                <text x="414" y="93" font-size="7.5" fill="#ef4444" opacity="0.8">200 MA</text>
+                <text x="340" y="105" font-size="7.5" fill="#f59e0b">GC = Golden Cross (50 MA crosses above 200 MA — bullish)</text>
+                <!-- Bounce zone label -->
+                <text x="165" y="110" font-size="7.5" fill="#3b82f6" font-style="italic">← 50 MA acts as support — price bounces off it</text>
+              </svg>
+            </div>
+            <div class="info-box">
+              <div class="info-label">🎯 One-line use case</div>
+              <p>
+                Use the <b>200 MA</b> to decide if a stock is in a long-term
+                uptrend before buying — only buy stocks trading
+                <b>above</b> their 200-day moving average.
+              </p>
+            </div>
+
+            <h3>2 — RSI (Relative Strength Index)</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <b>RSI</b> measures how fast and how much a stock has moved
+              recently. It gives you a number between <b>0 and 100</b>. Think of
+              it as a speedometer — it tells you if a stock has moved too fast
+              in one direction and might be due for a pause or reversal.
+            </p>
+            <ul>
+              <li>
+                <b>RSI above 70</b> — stock is <b>overbought</b>. It has risen
+                too fast. A pullback or pause is possible
+              </li>
+              <li>
+                <b>RSI below 30</b> — stock is <b>oversold</b>. It has fallen
+                too fast. A bounce is possible
+              </li>
+              <li>
+                <b>RSI around 50</b> — neutral zone. No strong signal either way
+              </li>
+            </ul>
+
+            <!-- VISUAL: RSI gauge -->
+            <div style="margin:0.5rem 0 1.25rem;padding:1.25rem 1rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:0.85rem;">🎯 RSI scale — what each zone means</div>
+              <svg viewBox="0 0 500 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Oversold zone 0-30 -->
+                <rect x="20" y="20" width="120" height="22" rx="4" fill="#10b981" opacity="0.2"/>
+                <rect x="20" y="20" width="120" height="22" rx="4" fill="none" stroke="#10b981" stroke-width="1" opacity="0.5"/>
+                <text x="80" y="35" text-anchor="middle" font-size="9" font-weight="700" fill="#10b981">0 — 30</text>
+                <text x="80" y="55" text-anchor="middle" font-size="8" fill="#10b981">OVERSOLD</text>
+                <text x="80" y="65" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">bounce possible ↑</text>
+                <!-- Neutral zone 30-70 -->
+                <rect x="140" y="20" width="220" height="22" rx="4" fill="color-mix(in srgb,var(--primary) 8%,transparent)"/>
+                <rect x="140" y="20" width="220" height="22" rx="4" fill="none" stroke="var(--border)" stroke-width="1"/>
+                <text x="250" y="35" text-anchor="middle" font-size="9" font-weight="700" fill="var(--text-muted)">30 — 70  NEUTRAL</text>
+                <text x="250" y="55" text-anchor="middle" font-size="8" fill="var(--text-muted)">No strong signal</text>
+                <!-- Overbought zone 70-100 -->
+                <rect x="360" y="20" width="120" height="22" rx="4" fill="#ef4444" opacity="0.15"/>
+                <rect x="360" y="20" width="120" height="22" rx="4" fill="none" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+                <text x="420" y="35" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444">70 — 100</text>
+                <text x="420" y="55" text-anchor="middle" font-size="8" fill="#ef4444">OVERBOUGHT</text>
+                <text x="420" y="65" text-anchor="middle" font-size="7.5" fill="var(--text-muted)">pullback possible ↓</text>
+                <!-- Needle example at 76 -->
+                <line x1="414" y1="16" x2="414" y2="44" stroke="#ef4444" stroke-width="2"/>
+                <polygon points="410,14 418,14 414,8" fill="#ef4444"/>
+                <text x="414" y="6" text-anchor="middle" font-size="7.5" fill="#ef4444" font-weight="700">76</text>
+              </svg>
+            </div>
+
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <b>Important:</b> Overbought doesn't mean "sell immediately." A
+              strong stock can stay overbought for a long time. RSI is most
+              useful when combined with support/resistance levels.
+            </p>
+            <div class="example-box">
+              <div class="ex-label">📊 RSI example</div>
+              <p>
+                Infosys has rallied 12% in 10 days. RSI hits 76 — overbought
+                territory. The stock then flatlines for a week before dipping
+                4%. A swing trader who saw the RSI at 76 near a resistance level
+                chose to <b>take profits early</b> rather than hold through the
+                dip.
+              </p>
+            </div>
+            <div class="info-box">
+              <div class="info-label">🎯 One-line use case</div>
+              <p>
+                When a stock you want to buy has RSI <b>below 35</b> and is
+                sitting at a known support level — that combination is a strong
+                signal to consider entering.
+              </p>
+            </div>
+
+            <h3>3 — MACD</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <b>MACD</b> (say it: "Mac-Dee") stands for Moving Average
+              Convergence Divergence. Don't worry about the name. Here's all you
+              need to know: MACD tells you whether
+              <b>momentum is building up or fading</b>.
+            </p>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              The MACD panel has three parts:
+            </p>
+            <ul>
+              <li>
+                <b>MACD line</b> — the faster line. Reacts quickly to price
+                changes
+              </li>
+              <li>
+                <b>Signal line</b> — the slower line. Lags behind slightly
+              </li>
+              <li>
+                <b>Histogram</b> — bars that show the gap between the two lines.
+                Bigger bars = stronger momentum
+              </li>
+            </ul>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <b>The main signal — the crossover:</b>
+            </p>
+            <ul>
+              <li>
+                <b>MACD line crosses above Signal line</b> → bullish signal.
+                Momentum is turning up. Many traders use this as a buy trigger
+              </li>
+              <li>
+                <b>MACD line crosses below Signal line</b> → bearish signal.
+                Momentum is turning down. Consider exiting or staying out
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">⚡ MACD example</div>
+              <p>
+                HDFC Bank has been falling for 3 weeks. Then the MACD line
+                (which was below the Signal line) crosses <b>above</b> the
+                Signal line. The histogram bars start shrinking and flip green.
+                A trader sees this as early evidence that sellers are losing
+                control — and watches for a buy entry near support.
+              </p>
+            </div>
+            <div class="info-box">
+              <div class="info-label">🎯 One-line use case</div>
+              <p>
+                Use a <b>MACD bullish crossover</b> on the daily chart as a
+                confirmation signal — enter a trade only after both the trend
+                (price above MA) and momentum (MACD crossed up) agree.
+              </p>
+            </div>
+
+            <h3>Using all three together</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Indicator</th>
+                    <th>What it answers</th>
+                    <th>Key signal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Moving Average</td>
+                    <td>What is the trend?</td>
+                    <td>Price above/below MA; Golden/Death Cross</td>
+                  </tr>
+                  <tr>
+                    <td>RSI</td>
+                    <td>Is the stock stretched?</td>
+                    <td>Above 70 = overbought · Below 30 = oversold</td>
+                  </tr>
+                  <tr>
+                    <td>MACD</td>
+                    <td>Is momentum shifting?</td>
+                    <td>MACD line crossing the Signal line</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="example-box">
+              <div class="ex-label">🔗 Combined signal example</div>
+              <p>
+                Reliance is above its 200 MA (uptrend ✓). RSI is at 38 after a
+                pullback (not overbought ✓). MACD just crossed bullish (momentum
+                turning up ✓). All three agree — this is a high-quality setup.
+                Three confirmations are far stronger than any single indicator
+                alone.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3 -->
+      <p class="chapter-label">Part 3 — Strategy &amp; Mindset</p>
+
+      <div class="section" id="risk">
+        <div class="section-card">
+          <span class="section-num">12</span>
+          <span class="section-tag">Protection</span>
+          <h2>Risk Management</h2>
+          <div class="content">
+            <p class="lead">
+              Making money in the market is not just about picking the right
+              stocks. It's about <b>protecting yourself when you're wrong</b>.
+              Even the best traders lose on 4 out of 10 trades. Risk management
+              is what keeps them alive for the other 6.
+            </p>
+
+            <h3>Rule 1 — Never risk too much on one trade</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.75;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              <span class="kw">The 1–2% Rule</span> — Never risk more than
+              <b>1–2% of your total capital</b> on a single trade. If you have
+              ₹1,00,000 in your account, your maximum loss on any one trade
+              should be ₹1,000–₹2,000. This way, even 10 losing trades in a row
+              only costs you 10–20% — not your entire account.
+            </p>
+            <div class="example-box">
+              <div class="ex-label">📌 Position sizing example</div>
+              <p>
+                Say you have ₹50,000. You buy Infosys at around
+                <b>₹1,800</b> and decide your stop-loss is at approx.
+                <b>₹1,755</b> (₹45 below). Risk per share = ₹45. If your max
+                loss is ₹1,000 (2% of capital), you can buy
+                <b>~22 shares</b> (₹1,000 ÷ ₹45). That's position sizing — not
+                buying "as many as you can afford."
+              </p>
+            </div>
+
+            <h3>Rule 2 — Stop Loss is not optional</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              A <b>stop-loss</b> is a pre-set price at which you exit a trade to
+              limit your loss. You decide it <b>before</b> you enter — not after
+              the stock is already falling. It removes emotion from the
+              decision.
+            </p>
+            <ul>
+              <li>
+                Place your stop-loss <b>below a support level</b>, not at a
+                random number
+              </li>
+              <li>
+                Once set, <b>do not move it lower</b> just because you "hope"
+                the stock will recover
+              </li>
+              <li>
+                Think of it as the cost of being wrong — a small, fixed fee
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">🛑 Stop-loss example</div>
+              <p>
+                Say you buy TCS at around <b>₹3,900</b> with a stop-loss at
+                approx. <b>₹3,820</b>. TCS drops to ₹3,820 — you exit and lose
+                roughly ₹80 per share. Painful, but controlled. Without a
+                stop-loss, you might have held all the way down much further,
+                hoping for a recovery that never came.
+              </p>
+            </div>
+
+            <h3>Rule 3 — Risk/Reward Ratio</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                color: var(--text-main);
+              "
+            >
+              Before entering any trade, ask:
+              <em>how much can I lose vs how much can I gain?</em> A good trade
+              has a <b>minimum 1:2 risk/reward ratio</b> — meaning if you risk
+              ₹1, you should aim to make at least ₹2.
+            </p>
+            <ul>
+              <li><b>1:1</b> — break even over time. Not worth it</li>
+              <li>
+                <b>1:2</b> — you can be right only 40% of the time and still be
+                profitable
+              </li>
+              <li>
+                <b>1:3</b> — excellent. Even winning 33% of trades keeps you in
+                profit
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">⚖️ Risk/Reward example</div>
+              <p>
+                Say you buy Reliance at around <b>₹2,900</b>. Stop-loss at
+                approx. <b>₹2,840</b> (risk ~₹60). Target around
+                <b>₹3,020</b> (reward ~₹120). That's a <b>1:2 ratio</b>. Even if
+                you lose 5 trades and win 5, the 5 wins (~₹600) beat the 5
+                losses (~₹300). You profit ~₹300 overall with a 50% win rate.
+              </p>
+            </div>
+
+            <!-- VISUAL: Risk/Reward diagram -->
+            <div style="margin:1.25rem 0 1.25rem;padding:1.25rem 1rem 1rem;background:color-mix(in srgb,var(--primary) 5%,transparent);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:0.85rem;">⚖️ Risk/Reward — why 1:2 wins even at 50% win rate</div>
+              <svg viewBox="0 0 500 95" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Entry line -->
+                <line x1="40" y1="48" x2="460" y2="48" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 3"/>
+                <text x="36" y="51" text-anchor="end" font-size="8" fill="var(--text-muted)">Entry</text>
+                <text x="36" y="62" text-anchor="end" font-size="7.5" fill="var(--text-muted)">₹2,900</text>
+                <!-- Stop loss zone (red, below entry) -->
+                <rect x="40" y="49" width="420" height="30" rx="0" fill="#ef4444" opacity="0.08"/>
+                <line x1="40" y1="78" x2="460" y2="78" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.7"/>
+                <text x="36" y="81" text-anchor="end" font-size="8" fill="#ef4444">Stop</text>
+                <text x="36" y="91" text-anchor="end" font-size="7.5" fill="#ef4444">₹2,840</text>
+                <!-- Risk label -->
+                <line x1="460" y1="49" x2="460" y2="77" stroke="#ef4444" stroke-width="1.5"/>
+                <polygon points="456,77 464,77 460,82" fill="#ef4444" opacity="0.8"/>
+                <text x="470" y="65" font-size="8.5" fill="#ef4444" font-weight="700">Risk</text>
+                <text x="470" y="75" font-size="8" fill="#ef4444">₹60</text>
+                <!-- Target zone (green, above entry) -->
+                <rect x="40" y="8" width="420" height="40" rx="0" fill="#10b981" opacity="0.08"/>
+                <line x1="40" y1="8" x2="460" y2="8" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.7"/>
+                <text x="36" y="11" text-anchor="end" font-size="8" fill="#10b981">Target</text>
+                <text x="36" y="21" text-anchor="end" font-size="7.5" fill="#10b981">₹3,020</text>
+                <!-- Reward label -->
+                <line x1="460" y1="9" x2="460" y2="47" stroke="#10b981" stroke-width="1.5"/>
+                <polygon points="456,9 464,9 460,4" fill="#10b981" opacity="0.8"/>
+                <text x="470" y="26" font-size="8.5" fill="#10b981" font-weight="700">Reward</text>
+                <text x="470" y="36" font-size="8" fill="#10b981">₹120</text>
+                <!-- 1:2 badge -->
+                <rect x="190" y="36" width="120" height="24" rx="6" fill="var(--primary)" opacity="0.9"/>
+                <text x="250" y="53" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">Ratio  1 : 2  ✓</text>
+              </svg>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 The golden rule</div>
+              <p>
+                Cut your losses short. Let your winners run. Most beginners do
+                the opposite — they sell winners quickly (afraid of losing
+                gains) and hold losers for too long (hoping they'll recover).
+                Flip this habit and your results will improve dramatically.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="investing-trading">
+        <div class="section-card">
+          <span class="section-num">13</span>
+          <span class="section-tag">Approach</span>
+          <h2>Investing vs Trading</h2>
+          <div class="content">
+            <p class="lead">
+              Both involve buying stocks — but the
+              <b>mindset, time horizon, and skill set</b> are completely
+              different. Knowing which one suits you can save you years of
+              frustration and money.
+            </p>
+
+            <h3>Long-Term Investing</h3>
+            <ul>
+              <li>
+                You buy and hold stocks or index funds for
+                <b>years or decades</b>
+              </li>
+              <li>
+                You rely on the <b>company's business growth</b>, not short-term
+                price moves
+              </li>
+              <li>
+                Requires very little time — review your portfolio
+                <b>once a month</b> is enough
+              </li>
+              <li>
+                Best tool: <b>SIP into NIFTY 50 index fund</b>. Low effort,
+                historically strong returns
+              </li>
+              <li>
+                Tax rate: <span class="kw-green">12.5% LTCG</span> — only
+                applied after you hold for more than 1 year. Very tax-friendly
+                for patient investors
+              </li>
+            </ul>
+            <div class="example-box">
+              <div class="ex-label">📅 Investing example</div>
+              <p>
+                In 2014, an investor put ₹10,000/month into a NIFTY 50 index
+                fund via SIP. By 2024, the NIFTY had roughly tripled. Their ₹12
+                lakh invested grew to over ₹25 lakh — without picking a single
+                stock or watching charts daily.
+              </p>
+            </div>
+
+            <h3>Trading</h3>
+            <ul>
+              <li>
+                You aim to profit from <b>short-term price movements</b> — days,
+                weeks, or even minutes
+              </li>
+              <li>
+                Requires <b>active time</b> — watching charts, managing trades,
+                reviewing daily
+              </li>
+              <li>
+                Higher potential returns, but also <b>higher risk and stress</b>
+              </li>
+              <li>
+                Most beginners who try intraday trading
+                <b>lose money in the first year</b>
+              </li>
+              <li>
+                Tax rate: <span class="kw">20% STCG</span> — applied on profits
+                from stocks held under 1 year. Significantly higher than
+                long-term investing
+              </li>
+            </ul>
+
+            <h3>Which one suits you?</h3>
+            <div class="table-scroll-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Factor</th>
+                    <th>Investing</th>
+                    <th>Trading</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Time needed</td>
+                    <td>1–2 hrs/month</td>
+                    <td>1–4 hrs/day</td>
+                  </tr>
+                  <tr>
+                    <td>Skill needed</td>
+                    <td>Basic (fundamentals)</td>
+                    <td>High (TA + discipline)</td>
+                  </tr>
+                  <tr>
+                    <td>Stress level</td>
+                    <td>Low</td>
+                    <td>High</td>
+                  </tr>
+                  <tr>
+                    <td>Time horizon</td>
+                    <td>Years to decades</td>
+                    <td>Minutes to weeks</td>
+                  </tr>
+                  <tr>
+                    <td>Best for</td>
+                    <td>Salaried professionals, beginners</td>
+                    <td>Full-time focused learners</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="info-box">
+              <div class="info-label">💡 Honest advice for beginners</div>
+              <p>
+                Start with <b>long-term investing</b> — a monthly SIP in a NIFTY
+                50 index fund. This builds wealth with near-zero effort. Only
+                move to active trading after you've spent at least 6–12 months
+                studying charts, practicing on paper trades, and understanding
+                risk. Don't rush it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="psychology">
+        <div class="section-card">
+          <span class="section-num">14</span>
+          <span class="section-tag">Mindset</span>
+          <h2>Psychology &amp; Common Mistakes</h2>
+          <div class="content">
+            <p class="lead">
+              Technical analysis can be learned in months. But
+              <b>controlling your emotions</b> takes years. Most traders don't
+              lose because of bad strategy — they lose because fear and greed
+              cause them to abandon their strategy at exactly the wrong moment.
+            </p>
+
+            <h3>The two emotions that destroy traders</h3>
+            <ul>
+              <li>
+                <b>Fear</b> — makes you exit winning trades too early, avoid
+                good setups, and panic-sell during normal pullbacks
+              </li>
+              <li>
+                <b>Greed</b> — makes you hold losers hoping they'll recover,
+                overtrade, and take oversized positions
+              </li>
+            </ul>
+
+            <!-- VISUAL: Fear vs Greed scale -->
+            <div style="margin:0.75rem 0 1.25rem;padding:1.25rem 1rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+              <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--primary);margin-bottom:0.85rem;">🧠 The emotional spectrum — where are you?</div>
+              <svg viewBox="0 0 500 78" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <!-- Gradient bar -->
+                <defs>
+                  <linearGradient id="emotionGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#3b82f6"/>
+                    <stop offset="35%" stop-color="#10b981"/>
+                    <stop offset="65%" stop-color="#f59e0b"/>
+                    <stop offset="100%" stop-color="#ef4444"/>
+                  </linearGradient>
+                </defs>
+                <rect x="20" y="22" width="460" height="18" rx="9" fill="url(#emotionGrad)" opacity="0.85"/>
+                <!-- Zone labels below bar -->
+                <text x="60" y="55" text-anchor="middle" font-size="8" fill="#3b82f6" font-weight="600">FEAR</text>
+                <text x="60" y="65" text-anchor="middle" font-size="7" fill="var(--text-muted)">Panic sell</text>
+                <text x="60" y="73" text-anchor="middle" font-size="7" fill="var(--text-muted)">Exit too early</text>
+                <text x="175" y="55" text-anchor="middle" font-size="8" fill="#10b981" font-weight="600">CALM ✓</text>
+                <text x="175" y="65" text-anchor="middle" font-size="7" fill="var(--text-muted)">Follow the plan</text>
+                <text x="175" y="73" text-anchor="middle" font-size="7" fill="var(--text-muted)">Stick to stop-loss</text>
+                <text x="325" y="55" text-anchor="middle" font-size="8" fill="#f59e0b" font-weight="600">OVERCONFIDENT</text>
+                <text x="325" y="65" text-anchor="middle" font-size="7" fill="var(--text-muted)">Skip stop-loss</text>
+                <text x="325" y="73" text-anchor="middle" font-size="7" fill="var(--text-muted)">Overtrade</text>
+                <text x="440" y="55" text-anchor="middle" font-size="8" fill="#ef4444" font-weight="600">GREED</text>
+                <text x="440" y="65" text-anchor="middle" font-size="7" fill="var(--text-muted)">Hold losers</text>
+                <text x="440" y="73" text-anchor="middle" font-size="7" fill="var(--text-muted)">Chase pumps</text>
+                <!-- Sweet spot marker -->
+                <polygon points="171,20 179,20 175,13" fill="#10b981"/>
+                <text x="175" y="10" text-anchor="middle" font-size="7.5" fill="#10b981" font-weight="700">aim here</text>
+              </svg>
+            </div>
+            <div class="example-box">
+              <div class="ex-label">😰 Fear in action</div>
+              <p>
+                Say you buy Reliance at around <b>₹2,900</b> with a target of
+                approx. <b>₹3,100</b>. It reaches <b>₹2,980</b>. You get nervous
+                and sell early — locking in ~₹80 instead of waiting for ~₹200.
+                Three days later it hits ₹3,110. Fear cost you roughly ₹120 per
+                share.
+              </p>
+            </div>
+            <div class="example-box">
+              <div class="ex-label">🤑 Greed in action</div>
+              <p>
+                You're down 8% on a stock. Instead of cutting the loss at your
+                stop-loss level, you think "it'll come back." It falls another
+                15%. Now you're down 23% and paralysed. Greed (and hope) turned
+                a small, planned loss into a big, unplanned one.
+              </p>
+            </div>
+
+            <h3>Common mistakes beginners make</h3>
+            <ul>
+              <li>
+                <span class="kw">No Plan</span> — entering a trade without
+                knowing your stop-loss or profit target in advance. This is how
+                most beginner losses happen
+              </li>
+              <li>
+                <span class="kw">Revenge Trading</span> — placing a new
+                impulsive trade right after a loss, hoping to "win it back"
+                quickly. Almost always leads to a second, bigger loss
+              </li>
+              <li>
+                <span class="kw">Overtrading</span> — placing too many trades
+                out of boredom or FOMO. Remember:
+                <b>not trading is sometimes the best trade</b>
+              </li>
+              <li>
+                <span class="kw">Moving Your Stop-Loss</span> — shifting your
+                stop-loss lower (or removing it) because you "feel" the stock
+                will recover. It usually doesn't
+              </li>
+              <li>
+                <span class="kw">Blind Tips</span> — acting on WhatsApp or
+                Telegram "hot tips" without understanding the reason. If you
+                don't know why to buy, you won't know when to sell
+              </li>
+              <li>
+                <span class="kw">No Diversification</span> — putting all your
+                money in one stock means one bad outcome can wipe out months of
+                gains. Spread across at least 5–8 stocks
+              </li>
+              <li>
+                <span class="kw">Obsessing Over P&amp;L</span> — checking your
+                profit/loss every hour creates anxiety and leads to panic
+                decisions. Trust your plan and check at end of day
+              </li>
+            </ul>
+
+            <h3>Habits that build consistency</h3>
+            <ul>
+              <li>
+                <b>Write a trade journal</b> — after every trade, note why you
+                entered, what happened, and what you learned. The pattern of
+                your mistakes will become obvious within weeks
+              </li>
+              <li>
+                <b>Follow a checklist</b> — before entering any trade, tick off:
+                trend ✓, support/resistance ✓, stop-loss set ✓, risk/reward
+                acceptable ✓
+              </li>
+              <li>
+                <b>Accept that losses are part of the process</b> — even a 60%
+                win rate is excellent. Losses are not failures; unplanned losses
+                are
+              </li>
+              <li>
+                <b>Take breaks</b> — after 2–3 losses in a row, step away from
+                the screen for the day. Trading while frustrated leads to more
+                losses
+              </li>
+              <li>
+                <b>Review weekly, not daily</b> — judge your performance over
+                20–30 trades, not 2–3
+              </li>
+            </ul>
+
+            <div class="example-box">
+              <div class="ex-label">📓 Trade journal example</div>
+              <p>
+                <b>Date:</b> 12 Mar &nbsp;|&nbsp; <b>Stock:</b> HDFC Bank
+                &nbsp;|&nbsp; <b>Entry:</b> ~₹1,640 &nbsp;|&nbsp;
+                <b>Stop:</b> ~₹1,610 &nbsp;|&nbsp; <b>Target:</b> ~₹1,700
+                &nbsp;|&nbsp; <b>Result:</b> Stopped out at ~₹1,610, loss
+                ~₹30/share &nbsp;|&nbsp; <b>Lesson:</b> Entered before RSI
+                confirmed — was too early. Wait for the candle to close next
+                time.
+              </p>
+            </div>
+
+            <h3>The right mindset in one sentence</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 1rem;
+                color: var(--text-main);
+              "
+            >
+              Focus on <b>following your process correctly</b>, not on the
+              outcome of any single trade. If you followed your rules and still
+              lost — that's fine. If you broke your rules and won — that's
+              dangerous. Consistency comes from process, not from luck.
+            </p>
+
+            <div class="info-box">
+              <div class="info-label">
+                💡 The best thing you can do right now
+              </div>
+              <p>
+                Before putting real money into any trade, spend
+                <b>30 days paper trading</b> — write down your entries, stops,
+                and targets without actually placing orders. See how your
+                strategy performs. Fix what's not working. Then trade small with
+                real money. Patience at the start saves a lot of pain later.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CTA SECTION ── -->
+      <div style="margin-top:4rem;background:linear-gradient(135deg,#021779 0%,#0a2e9e 100%);border-radius:16px;padding:2.5rem 2rem;text-align:center;">
+        <p style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:0.6rem;">🔓 Unlock Full Course</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:#fff;margin-bottom:0.65rem;line-height:1.25;">Get Full Lifetime Access</h2>
+        <p style="font-size:0.92rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;line-height:1.7;">This is a free preview. Unlock all 14 chapters with detailed explanations, examples, charts &amp; more — for just <strong style="color:#fff;">₹19</strong>.</p>
+        <a href="RAZORPAY_LINK_HERE" target="_blank" style="display:inline-block;background:#10b981;color:#ffffff;font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:700;padding:1rem 2.5rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 18px rgba(16,185,129,0.45);margin-bottom:0.75rem;">
+          🔓 Unlock Full Course – ₹19
+        </a>
+        <p style="font-size:12px; color:rgba(255,255,255,0.65); margin-top:10px;">
+Secure payment • Instant access after payment
+</p>
+        <p style="margin-top:15px; font-size:13px; color:rgba(255,255,255,0.65);">
+Or pay via UPI QR and message me to get access
+</p>
+        <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:0.5rem;">One-time payment · No subscription · Instant access</p>
+      </div>
+
+      <!-- AngelOne Referral -->
+      <div style="margin-top:2rem;text-align:center;">
+        <a href="PASTE_YOUR_ANGELONE_REFERRAL_LINK_HERE" style="display:inline-block;background:#ff6b00;color:#ffffff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:0.85rem 2rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(255,107,0,0.35);">📲 Open Free Demat Account on AngelOne</a>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-left">
+          <span class="footer-title">Stock Market Master Guide</span>
+          <span class="footer-sub"
+            >Indian Markets Edition &nbsp;·&nbsp; 14 Chapters &nbsp;·&nbsp;
+            Beginner-Friendly Reference</span
+          >
+        </div>
+        <div class="footer-right">
+          <div class="footer-copy">© 2026 Rudra Tiwari</div>
+          <div class="footer-rights">All rights reserved</div>
+        </div>
+      </footer>
+
+      <div style="margin:1.5rem 0 2rem;padding:1rem 1.25rem;background:color-mix(in srgb,var(--text-muted) 8%,transparent);border:1px solid var(--border);border-radius:10px;font-size:0.75rem;color:var(--text-muted);line-height:1.7;text-align:center;">
+        This content is for educational purposes only.<br />
+        This is not financial or investment advice.<br />
+        This content does not provide stock recommendations.<br />
+        Do your own research before making any financial decisions.
+      </div>
+
+      <p style="font-size:11px; color:gray; text-align:center; margin-top:40px;">
+This course is for educational purposes only. No financial advice. No profit guarantee.
+</p>
+    </main>
+
+    <!-- Back to top -->
+    <button id="back-top" aria-label="Back to top">↑</button>
+
+    <script>
+      /* ── Theme persistence & toggle ── */
+      const html = document.documentElement;
+      const themeBtn = document.getElementById("theme-toggle");
+
+      const saved = localStorage.getItem("smg-theme") || "light";
+      html.setAttribute("data-theme", saved);
+
+      themeBtn.addEventListener("click", () => {
+        const next =
+          html.getAttribute("data-theme") === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("smg-theme", next);
+      });
+
+      /* ── Scroll progress bar ── */
+      const bar = document.getElementById("progress-bar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          const total =
+            document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (window.scrollY / total) * 100 + "%";
+        },
+        { passive: true },
+      );
+
+      /* ── Back to top ── */
+      const btn = document.getElementById("back-top");
+      window.addEventListener(
+        "scroll",
+        () => {
+          btn.classList.toggle("visible", window.scrollY > 420);
+        },
+        { passive: true },
+      );
+      btn.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" }),
+      );
+
+      /* ── Active nav link on scroll ── */
+      const sections = document.querySelectorAll(".section[id]");
+      const links = document.querySelectorAll("nav#sidebar a");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove("active"));
+              const a = document.querySelector(
+                `nav#sidebar a[href="#${e.target.id}"]`,
+              );
+              if (a) a.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-25% 0px -65% 0px" },
+      );
+      sections.forEach((s) => io.observe(s));
+
+      /* ── Mobile sidebar ── */
+      const toggle = document.getElementById("menu-toggle");
+      const sidebar = document.getElementById("sidebar");
+
+      // Overlay for closing sidebar on outside tap
+      const overlay = document.createElement("div");
+      overlay.style.cssText =
+        "display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.45);";
+      document.body.appendChild(overlay);
+
+      function openSidebar() {
+        sidebar.classList.add("open");
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+      function closeSidebar() {
+        sidebar.classList.remove("open");
+        overlay.style.display = "none";
+        document.body.style.overflow = "";
+      }
+
+      toggle.addEventListener("click", () =>
+        sidebar.classList.contains("open") ? closeSidebar() : openSidebar(),
+      );
+      overlay.addEventListener("click", closeSidebar);
+      sidebar
+        .querySelectorAll("a")
+        .forEach((a) => a.addEventListener("click", closeSidebar));
+    </script>
+    <script>
+      const searchInput = document.getElementById("searchInput");
+      let searchTimer = null;
+
+      searchInput.addEventListener("input", function () {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(
+          () => doSearch(this.value.trim().toLowerCase()),
+          250,
+        );
+      });
+
+      function doSearch(query) {
+        // Remove previous highlights safely (collect first, then replace)
+        document.querySelectorAll(".highlight").forEach((el) => {
+          const parent = el.parentNode;
+          if (parent) {
+            parent.replaceChild(document.createTextNode(el.textContent), el);
+            parent.normalize();
+          }
+        });
+
+        if (!query) return;
+
+        // Only search inside the main content area, not nav/scripts/inputs
+        const searchRoot = document.getElementById("main-content");
+        const walker = document.createTreeWalker(
+          searchRoot,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode: (node) => {
+              const tag = node.parentNode && node.parentNode.tagName;
+              if (["SCRIPT", "STYLE", "INPUT", "TEXTAREA"].includes(tag))
+                return NodeFilter.FILTER_REJECT;
+              return NodeFilter.FILTER_ACCEPT;
+            },
+          },
+        );
+
+        // Collect ALL matching nodes first — never modify DOM during walk
+        const matches = [];
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          if (node.nodeValue.toLowerCase().includes(query)) {
+            matches.push(node);
+          }
+        }
+
+        let firstMatch = null;
+
+        matches.forEach((node) => {
+          // Node may have been split already; re-check it still exists
+          if (!node.parentNode) return;
+
+          const text = node.nodeValue;
+          const idx = text.toLowerCase().indexOf(query);
+          if (idx === -1) return;
+
+          const before = document.createTextNode(text.slice(0, idx));
+          const span = document.createElement("span");
+          span.className = "highlight";
+          span.textContent = text.slice(idx, idx + query.length);
+          const after = document.createTextNode(text.slice(idx + query.length));
+
+          const parent = node.parentNode;
+          parent.insertBefore(before, node);
+          parent.insertBefore(span, node);
+          parent.insertBefore(after, node);
+          parent.removeChild(node);
+
+          if (!firstMatch) firstMatch = span;
+        });
+
+        if (firstMatch) {
+          firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    </script>
+  </body>
+</html>

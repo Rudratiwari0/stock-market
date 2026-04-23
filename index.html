@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Market Course – Only ₹19</title>
+    <meta
+      name="description"
+      content="Complete Stock Market Course for Indian beginners. Learn NSE, BSE, NIFTY 50, charts, candlesticks, risk management & more. Only ₹19."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root,
+      [data-theme="light"] {
+        --bg: #f8fafc;
+        --bg-nav: #0f172a;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --primary: #021779;
+        --accent: #10b981;
+        --accent-soft: #d1fae5;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --shadow: rgba(15, 23, 42, 0.08);
+      }
+      [data-theme="dark"] {
+        --bg: #0b1220;
+        --bg-nav: #060d18;
+        --surface: #111827;
+        --border: #1f2937;
+        --primary: #ffffff;
+        --accent: #22c55e;
+        --accent-soft: #14532d;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --shadow: rgba(0, 0, 0, 0.45);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text-main);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition:
+          background 0.35s,
+          color 0.35s;
+      }
+
+      /* ── TOP BAR ── */
+      .top-bar {
+        background: var(--bg-nav);
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .top-bar-brand {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .top-bar-badge {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      #theme-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        background: rgba(255, 255, 255, 0.07);
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 1rem;
+        flex-shrink: 0;
+        transition: background 0.2s;
+      }
+      #theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+      }
+      .icon-sun {
+        display: none;
+      }
+      .icon-moon {
+        display: block;
+      }
+      [data-theme="dark"] .icon-sun {
+        display: block;
+      }
+      [data-theme="dark"] .icon-moon {
+        display: none;
+      }
+
+      /* ── MAIN ── */
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: 2.5rem 1rem 2rem;
+        margin-bottom: 2.5rem;
+      }
+      .hero .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.67rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        background: color-mix(in srgb, var(--primary) 10%, transparent);
+        padding: 0.25rem 0.8rem;
+        border-radius: 20px;
+        border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.9rem, 6vw, 3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        color: var(--text-main);
+        margin-bottom: 0.85rem;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--primary);
+      }
+      .hero .sub {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        max-width: 480px;
+        margin: 0 auto 2rem;
+      }
+
+      /* ── STATS ── */
+      .stats-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--surface);
+        width: fit-content;
+        margin: 0 auto 2.5rem;
+      }
+      .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 1rem 1.75rem;
+        border-right: 1px solid var(--border);
+        text-align: center;
+      }
+      .stat:last-child {
+        border-right: none;
+      }
+      .stat .val {
+        font-family: "Playfair Display", serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+      .stat .key {
+        font-size: 0.63rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ── CTA BOX ── */
+      .cta-box {
+        background: linear-gradient(135deg, #021779 0%, #0a2e9e 100%);
+        border-radius: 16px;
+        padding: 2rem 1.75rem;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      [data-theme="dark"] .cta-box {
+        background: linear-gradient(135deg, #1f3577 0%, #0d2d8a 100%);
+      }
+      .cta-price-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .cta-price-old {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.45);
+        text-decoration: line-through;
+      }
+      .cta-price {
+        font-family: "Playfair Display", serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .cta-badge {
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.55rem;
+        border-radius: 20px;
+      }
+      .cta-title {
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.75);
+        margin-bottom: 1.5rem;
+      }
+      .cta-btn {
+        display: inline-block;
+        background: #10b981;
+        color: #ffffff !important;
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        padding: 1rem 2.75rem;
+        border-radius: 10px;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45);
+        letter-spacing: 0.01em;
+        cursor: pointer;
+      }
+      .cta-btn:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.55);
+      }
+      .cta-instant {
+        margin-top: 0.85rem;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .cta-instant span {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ── TOPICS ── */
+      .topics-header {
+        margin-bottom: 1.75rem;
+      }
+      .topics-header .label {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+      }
+      .topics-header h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.4rem;
+      }
+      .topics-header p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.65;
+      }
+      .part-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin: 1.75rem 0 0.6rem;
+      }
+      .topic-list {
+        list-style: none;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--surface);
+        margin-bottom: 0.5rem;
+      }
+      .topic-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.85rem 1.1rem;
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      .topic-list li:last-child {
+        border-bottom: none;
+      }
+      .topic-list li:hover {
+        background: color-mix(in srgb, var(--primary) 4%, transparent);
+      }
+      .topic-num {
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        min-width: 2rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .topic-name {
+        flex: 1;
+        font-size: 0.88rem;
+        color: var(--text-main);
+        font-weight: 400;
+      }
+      .topic-lock {
+        font-size: 0.8rem;
+        opacity: 0.45;
+      }
+
+      /* ── BOTTOM CTA ── */
+      .bottom-cta {
+        margin-top: 3rem;
+        text-align: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 2rem 1.5rem;
+      }
+      .bottom-cta p {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.65;
+        margin-bottom: 1.25rem;
+      }
+      .cta-btn-outline {
+        display: inline-block;
+        background: #10b981;
+        color: #ffffff !important;
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        padding: 1rem 2.75rem;
+        border-radius: 10px;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+        cursor: pointer;
+      }
+      .cta-btn-outline:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+      }
+      .instant {
+        display: block;
+        margin-top: 0.85rem;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+      .instant span {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ── ANGELONE CARD ── */
+      .angelone-card {
+        margin-top: 2.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 4px solid #ff6b00;
+        border-radius: 14px;
+        padding: 1.75rem 1.75rem 1.5rem;
+      }
+      .ao-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .ao-logo {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #ff6b00, #ff9a3c);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 0.95rem;
+        color: #fff;
+        flex-shrink: 0;
+        letter-spacing: 0.03em;
+      }
+      .ao-badge {
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ff6b00;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+      }
+      .ao-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+      .ao-desc {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+        margin-bottom: 1.1rem;
+      }
+      .ao-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.45rem;
+        margin-bottom: 1.25rem;
+      }
+      .ao-feat {
+        font-size: 0.82rem;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .ao-btn {
+        display: inline-block;
+        background: #ff6b00;
+        color: #ffffff !important;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 0.8rem 1.75rem;
+        border-radius: 9px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        box-shadow: 0 4px 14px rgba(255, 107, 0, 0.32);
+        margin-bottom: 0.85rem;
+      }
+      .ao-btn:hover {
+        background: #e05e00;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 20px rgba(255, 107, 0, 0.42);
+      }
+      .ao-note {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        margin-top: 3.5rem;
+        padding: 2rem 0 0;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .footer-title {
+        font-family: "Playfair Display", serif;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+      .footer-sub {
+        font-size: 0.74rem;
+        color: var(--text-muted);
+        margin-top: 0.2rem;
+      }
+      .footer-copy {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-main);
+        text-align: right;
+      }
+      .footer-rights {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        text-align: right;
+      }
+
+      /* ── DISCLAIMER ── */
+      .disclaimer {
+        margin-top: 2rem;
+        padding: 1rem 1.25rem;
+        background: color-mix(in srgb, var(--text-muted) 8%, transparent);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        text-align: center;
+      }
+
+      /* ── MOBILE BUTTON FIX ── */
+      @media (max-width: 600px) {
+        .cta-btn, .cta-btn-outline {
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 480px) {
+        main {
+          padding: 2rem 1rem 4rem;
+        }
+        .hero {
+          padding: 1.5rem 0.5rem 1.5rem;
+        }
+        .hero h1 {
+          font-size: clamp(1.6rem, 8vw, 2.2rem);
+        }
+        .stats-row {
+          width: 100%;
+        }
+        .stat {
+          flex: 1;
+          padding: 0.75rem 0.5rem;
+        }
+        .cta-price {
+          font-size: 2rem;
+        }
+        .topic-list li {
+          padding: 0.75rem 0.85rem;
+        }
+        .topic-name {
+          font-size: 0.86rem;
+        }
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .footer-copy,
+        .footer-rights {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div>
+        <div class="top-bar-badge">⚡ Indian Stock Market</div>
+        <div class="top-bar-brand">Stock Market Master Guide</div>
+      </div>
+      <button id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">☀️</span>
+      </button>
+    </div>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <p class="eyebrow">🇮🇳 Beginner-Friendly · Indian Markets</p>
+        <h1>Stock Market Guide<br /><em>Only ₹19</em></h1>
+        <p class="sub">
+          A complete, structured guide to the Indian stock market — for educational purposes.
+          NSE, BSE, charts, candlesticks, risk management &amp; more. Many learners use this
+          as a starting point to understand how markets work.
+        </p>
+
+        <div class="stats-row">
+          <div class="stat">
+            <span class="val">14</span><span class="key">Chapters</span>
+          </div>
+          <div class="stat">
+            <span class="val">NSE &amp; BSE</span
+            ><span class="key">Exchanges</span>
+          </div>
+          <div class="stat">
+            <span class="val">₹19</span><span class="key">Only</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Box -->
+      <div class="cta-box">
+        <div class="cta-price-row">
+          <span class="cta-price-old">₹499</span>
+          <span class="cta-price">₹19</span>
+          <span class="cta-badge">96% OFF</span>
+        </div>
+        <p class="cta-title">One-time payment · Full lifetime access</p>
+        <a href="RAZORPAY_LINK_HERE" target="_blank" class="cta-btn">
+Get Instant Access
+</a>
+        <p style="font-size:12px; color:#ccc; margin-top:10px;">
+Secure payment • Instant access after payment
+</p>
+        <p style="margin-top:15px; font-size:13px;">
+Or pay via UPI QR and message me to get access
+</p>
+        <p class="cta-instant"><span>⚡ Instant access</span> after payment</p>
+      </div>
+
+      <!-- Topics -->
+      <div class="topics-header">
+        <div class="label">What's inside</div>
+        <h2>Course Topics</h2>
+        <p>
+          14 chapters covering common strategies and concepts many learners study
+          when exploring the Indian stock market — for educational purposes only.
+        </p>
+      </div>
+
+      <p class="part-label">Part 1 — Fundamentals</p>
+      <ul class="topic-list">
+        <li>
+          <span class="topic-num">01</span>
+          <span class="topic-name">Introduction to the Indian Stock Market</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">02</span>
+          <span class="topic-name">What is the Stock Market?</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">03</span>
+          <span class="topic-name">NSE &amp; BSE — India's Two Stock Exchanges</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">04</span>
+          <span class="topic-name">NIFTY 50 — India's Most Famous Index</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">5.1</span>
+          <span class="topic-name">How Buying &amp; Selling Works</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">5.2</span>
+          <span class="topic-name">Demat Account — What It Is &amp; How to Open One</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">5.3</span>
+          <span class="topic-name">Market Participants — Who Trades the Market?</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">6.1</span>
+          <span class="topic-name">Order Types — Market, Limit &amp; Stop Loss</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">6.2</span>
+          <span class="topic-name">Bid &amp; Ask Price — Understanding the Spread</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">6.3</span>
+          <span class="topic-name">Volume — What It Tells You About a Stock</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+      </ul>
+
+      <p class="part-label">Part 2 — Technical Analysis</p>
+      <ul class="topic-list">
+        <li>
+          <span class="topic-num">7.1</span>
+          <span class="topic-name">Charts Basics — Line &amp; Candlestick Charts</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">7.2</span>
+          <span class="topic-name">Timeframes — Intraday vs Swing vs Long-Term</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">08</span>
+          <span class="topic-name">Candlestick Patterns — Doji, Hammer, Engulfing &amp; More</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">09</span>
+          <span class="topic-name">Support &amp; Resistance — Key Price Levels</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">10</span>
+          <span class="topic-name">Trend — Uptrend, Downtrend &amp; Sideways</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">11</span>
+          <span class="topic-name">Indicators — Moving Averages, RSI, MACD &amp; More</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+      </ul>
+
+      <p class="part-label">Part 3 — Strategy &amp; Mindset</p>
+      <ul class="topic-list">
+        <li>
+          <span class="topic-num">12</span>
+          <span class="topic-name">Risk Management — Stop Loss, Position Sizing &amp; R:R Ratio</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">13</span>
+          <span class="topic-name">Investing vs Trading — Which One Is Right for You?</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+        <li>
+          <span class="topic-num">14</span>
+          <span class="topic-name">Trading Psychology — Fear, Greed &amp; Consistency</span>
+          <span class="topic-lock">🔒</span>
+        </li>
+      </ul>
+
+      <!-- Bottom CTA -->
+      <div class="bottom-cta">
+        <p>
+          Get <strong>instant access</strong> to all 14 chapters for just
+          <strong>₹19</strong>. One-time payment. No subscription.
+        </p>
+        <a href="RAZORPAY_LINK_HERE" target="_blank" class="cta-btn-outline"
+          >🔓 Unlock Full Course – ₹19</a
+        >
+        <span class="instant"><span>⚡ Instant access</span> after payment</span>
+      </div>
+
+      <!-- AngelOne Referral -->
+      <div style="margin-top:2rem;text-align:center;">
+        <a href="PASTE_YOUR_ANGELONE_REFERRAL_LINK_HERE" style="display:inline-block;background:#ff6b00;color:#ffffff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:0.85rem 2rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(255,107,0,0.35);">📲 Open Free Demat Account on AngelOne</a>
+      </div>
+
+      <footer>
+        <div>
+          <div class="footer-title">Stock Market Master Guide</div>
+          <div class="footer-sub">
+            Indian Markets Edition &nbsp;·&nbsp; 14 Chapters &nbsp;·&nbsp;
+            Beginner-Friendly
+          </div>
+        </div>
+        <div>
+          <div class="footer-copy">© 2026 Rudra Tiwari</div>
+          <div class="footer-rights">All rights reserved</div>
+        </div>
+      </footer>
+
+      <div class="disclaimer">
+        This content is for educational purposes only.<br />
+        This is not financial or investment advice.<br />
+        This content does not provide stock recommendations.<br />
+        Do your own research before making any financial decisions.
+      </div>
+
+      <p style="font-size:11px; color:gray; text-align:center; margin-top:40px;">
+This course is for educational purposes only. No financial advice. No profit guarantee.
+</p>
+    </main>
+
+    <script>
+      const html = document.documentElement;
+      const btn = document.getElementById("theme-toggle");
+      const saved = localStorage.getItem("smg-theme") || "light";
+      html.setAttribute("data-theme", saved);
+      btn.addEventListener("click", () => {
+        const next =
+          html.getAttribute("data-theme") === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("smg-theme", next);
+      });
+    </script>
+  </body>
+</html>
