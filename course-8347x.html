@@ -2,9 +2,9 @@
 <html lang="en" data-theme="light">
 <head>
 <script>
-let pass = prompt("Enter access code:");
+let pass = prompt("Enter access code / एक्सेस कोड डालें:");
 if(pass !== "1234"){
-  document.body.innerHTML = "Access Denied";
+  document.body.innerHTML = "Access Denied / एक्सेस नहीं मिला";
 }
 </script>
   <meta charset="UTF-8" />
@@ -451,7 +451,6 @@ if(pass !== "1234"){
 
 <!-- ══ MAIN ══ -->
 <main id="main-content">
-
   <!-- Hero -->
   <section class="hero">
     <p class="eyebrow">⚡ Indian Stock Market · Complete Reference</p>
@@ -1471,6 +1470,11 @@ if(pass !== "1234"){
     });
     if (firstMatch) firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+</script>
+<script>
+  document.querySelectorAll('[data-lang-switch="hi"]').forEach((button) => {
+    button.textContent = "हिंदी";
+  });
 </script>
 </body>
 </html>
