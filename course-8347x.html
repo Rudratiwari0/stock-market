@@ -132,6 +132,52 @@ if(pass !== "1234"){
       color: #EF4444;
     }
     .pw-error.show { display: block; }
+    .language-switcher {
+      position: fixed;
+      left: 1rem;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      gap: 0.35rem;
+      padding: 0.3rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      box-shadow: 0 10px 28px var(--shadow);
+      z-index: 250;
+      backdrop-filter: blur(8px);
+    }
+    .lang-chip {
+      border: none;
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      background: rgba(15, 23, 42, 0.08);
+      color: var(--text-main);
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 1;
+      -webkit-text-fill-color: currentColor;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-chip.is-active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(2, 23, 121, 0.22);
+    }
+    [data-theme="dark"] .lang-chip.is-active {
+      background: #f8fafc;
+      color: #0f172a;
+      box-shadow: none;
+    }
+    #google_translate_element,
+    .goog-logo-link,
+    .goog-te-gadget span,
+    .goog-te-banner-frame,
+    .skiptranslate iframe { display:none !important; }
+    .goog-te-gadget { font-size:0 !important; }
+    body { top:0 !important; }
 
     /* ══ SIDEBAR ══ */
     nav#sidebar {
@@ -332,6 +378,8 @@ if(pass !== "1234"){
       .hero-meta .stat { padding: 0.85rem 1.25rem; flex: 1; }
       .section-card { padding: 1.5rem 1.25rem; border-radius: 10px; }
       footer { flex-direction: column; align-items: flex-start; }
+      .language-switcher { left:0.75rem; right:0.75rem; bottom:calc(0.75rem + env(safe-area-inset-bottom, 0px)); justify-content:center; }
+      .lang-chip { flex:1; max-width:140px; padding:0.6rem 0.8rem; font-size:0.78rem; }
     }
     @media (max-width: 480px) {
       main { padding: 4rem 1rem 5rem; }
@@ -385,6 +433,11 @@ if(pass !== "1234"){
   </style>
 </head>
 <body>
+<div class="language-switcher notranslate" aria-label="Language switcher" translate="no">
+  <button class="lang-chip notranslate is-active" type="button" data-lang="en" translate="no">English</button>
+  <button class="lang-chip notranslate" type="button" data-lang="hi" translate="no">Hindi</button>
+</div>
+<div id="google_translate_element" aria-hidden="true"></div>
 
 <!-- Password Overlay -->
 <div id="pw-overlay">
@@ -1319,7 +1372,7 @@ if(pass !== "1234"){
       <span class="footer-sub">Indian Markets Edition &nbsp;·&nbsp; 14 Chapters &nbsp;·&nbsp; Beginner-Friendly Reference</span>
     </div>
     <div class="footer-right">
-      <div class="footer-copy">© 2026 Rudra Tiwari</div>
+      <div class="footer-copy">© 2026 Stock Market Guide</div>
       <div class="footer-rights">All rights reserved</div>
     </div>
   </footer>
@@ -1341,6 +1394,58 @@ if(pass !== "1234"){
 
 <script>
   /* ── Password protection ── */
+  function setGoogleTranslateCookie(value) {
+    document.cookie = `googtrans=${value};path=/`;
+  }
+
+  function updateLanguageButtons(lang) {
+    document.querySelectorAll("[data-lang]").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.lang === lang);
+    });
+  }
+
+  function applyPageLanguage(lang) {
+    updateLanguageButtons(lang);
+    if (lang === 'en') {
+      setGoogleTranslateCookie('/en/en');
+      return;
+    }
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = 'hi';
+      select.dispatchEvent(new Event('change'));
+    }
+  }
+
+  function initSimpleLang() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        autoDisplay: false
+      },
+      'google_translate_element'
+    );
+    window.setTimeout(() => {
+      applyPageLanguage(localStorage.getItem('smg-language') || 'en');
+    }, 400);
+  }
+
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const lang = button.dataset.lang;
+      localStorage.setItem('smg-language', lang);
+      if (lang === 'en') {
+        setGoogleTranslateCookie('/en/en');
+        window.location.reload();
+        return;
+      }
+      applyPageLanguage(lang);
+    });
+  });
+
+  updateLanguageButtons(localStorage.getItem('smg-language') || 'en');
+
   const CORRECT = '4582';
   const overlay = document.getElementById('pw-overlay');
   const input   = document.getElementById('pw-input');
@@ -1476,5 +1581,6 @@ if(pass !== "1234"){
     button.textContent = "हिंदी";
   });
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=initSimpleLang"></script>
 </body>
 </html>
